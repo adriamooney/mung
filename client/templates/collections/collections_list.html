@@ -1,0 +1,12 @@
+<template name="collectionsList">
+	<ul class="nav nav-pills nav-stacked collections-list">
+		{{#each collections}}
+			<li>{{>collectionItem}}</li>
+		{{/each}}
+	</ul>
+</template>
+
+
+<template name="collectionItem">
+	{{title}} 
+</template>

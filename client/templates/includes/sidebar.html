@@ -1,0 +1,7 @@
+<template name="sidebar">
+	<div class="col-md-4">
+		<h3>Public Collections</h3>
+		{{#if currentUser}}<h3>My Collections</h3>{{>collectionsList}}{{/if}}
+
+	</div>
+</template>
