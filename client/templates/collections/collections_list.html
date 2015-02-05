@@ -1,12 +1,13 @@
 <template name="collectionsList">
 	<ul class="nav nav-pills nav-stacked collections-list">
 		{{#each collections}}
-			<li>{{>collectionItem}}</li>
+			<li class="{{selectedCollection}}">{{>collectionItem}}</li>
 		{{/each}}
+		<li><button class="btn btn-primary btn-sm"><i class="fa fa-plus-circle"></i> Add new collection</button></li>
 	</ul>
 </template>
 
 
 <template name="collectionItem">
-	{{title}} 
+	{{title}}
 </template>
