@@ -1,9 +1,15 @@
 <template name="collectionsList">
 	<ul class="nav nav-pills nav-stacked collections-list">
 		{{#each collections}}
-			<li class="{{selectedCollection}}">{{>collectionItem}}</li>
+			<li>{{>collectionItem}}</li>
 		{{/each}}
-		<li><button class="btn btn-primary btn-sm"><i class="fa fa-plus-circle"></i> Add new collection</button></li>
+		<!--
+		https://github.com/wdavidw/node-csv
+		https://github.com/tomitrescak/meteor-uploads
+		http://stackoverflow.com/questions/19314200/using-node-csv-and-meteor-file-to-import-csv-into-a-collection
+		-->
+		{{> upload_bootstrap fileTypes='.csv' multiple=true }}
+		<!--<li><button class="btn btn-primary btn-sm"><i class="fa fa-plus-circle"></i> Add new collection</button></li>-->
 	</ul>
 </template>
 
