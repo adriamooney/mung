@@ -4,57 +4,19 @@ if (Collections.find().count() === 0) {
 
   Collections.insert({
     title: 'My DataSet 1',
-    submitted: new Date(now - 10 * 3600 * 1000),
-    data: {
-        person: {
-            height: 100,
-            weight: 50
+    file_name: 'some-name.csv',
+    date_added: new Date(now - 10 * 3600 * 1000),
+    file_data: {
+        property_0: {
+            name: 'height',
+            property_data: [100, 50, 60, 75, 120, 101]
         },
-        person: {
-            height: 65,
-            weight: 45
-        },
-        person: {
-            height: 103,
-            weight: 70
+        property_1: {
+            name: 'weight',
+            property_data: [120, 150, 160, 175, 220, 201]
         }
     }
   });
-
-  Collections.insert({
-    title: 'My DataSet 2',
-    submitted: new Date(now - 12 * 3600 * 1000),
-    data: [
-                {
-                    "colorName":"red",
-                    "hexValue":"#f00"
-                },
-                {
-                    "colorName":"green",
-                    "hexValue":"#0f0"
-                },
-                {
-                    "colorName":"blue",
-                    "hexValue":"#00f"
-                },
-                {
-                    "colorName":"cyan",
-                    "hexValue":"#0ff"
-                },
-                {
-                    "colorName":"magenta",
-                    "hexValue":"#f0f"
-                },
-                {
-                    "colorName":"yellow",
-                    "hexValue":"#ff0"
-                },
-                {
-                    "colorName":"black",
-                    "hexValue":"#000"
-                }
-            
-        ]
-
-  });
 }
+
+console.log(Collections.find().fetch());
