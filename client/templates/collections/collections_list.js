@@ -14,8 +14,11 @@ Template.collectionsList.events({
 	'click li': function(e) {
 		//console.log(this._id);
 
+
 		var collectionId = this._id;
+		console.log(collectionId);
 		var data = Collections.findOne({_id: this._id});
+		console.log(data);
 		var canvas = document.getElementById('canvas');
 
 		var selectedItems = Session.get('selectedCollection', selectedItems);

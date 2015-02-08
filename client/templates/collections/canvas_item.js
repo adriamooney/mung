@@ -19,9 +19,10 @@ Template.canvasItem.events({
 Template.canvas.rendered = function() {
 	//this object needs to be a variable that is populated by the id's of the selected collections, then we need to render the canvasItem template for each one
 	
+		console.log(Collections.find().count());
 
 		var p = Session.get('selectedCollection');
-		console.log(p);
+
 
 		var canvas = document.getElementById('canvas');
 		if(p) {
@@ -29,6 +30,7 @@ Template.canvas.rendered = function() {
 			  if (p.hasOwnProperty(key)) {
 
 			    var data = Collections.findOne({_id: p[key]});
+
 
 			    Blaze.renderWithData(Template.canvasItem, data, canvas);
 			  }
