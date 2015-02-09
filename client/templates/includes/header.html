@@ -16,9 +16,14 @@
           <ul class="nav navbar-nav navbar-right">
             {{> loginButtons}}
           </ul>
+          <ul class="nav navbar-nav">
+          <!--spacebars equivalent of Meter.user()-->
+          {{#if currentUser}}<li><a href="/account/{{currentUser._id}}">Account</a></li>{{/if}}
+        </ul>
         </div>
       </div>
     </div>
   </nav>
 
 </template>
+
