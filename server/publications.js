@@ -10,3 +10,20 @@
     Meteor.publish('organizations', function() {
     	return Organizations.find();
     });
+
+
+	Meteor.publish('organizationsUsers', function(org) {
+	    var organization = profile.organization;
+	    //http://stackoverflow.com/questions/27299994/meteor-users-find-not-returning-in-publish
+	    // this is not quite right:
+	    return Meteor.users.find({}, {$match:{organization: 'Company A'}});
+	}); 
+
+	Meteor.publish('users', function() {
+		return Meteor.users.find();
+	});
+
+	// in server/publish.js
+	Meteor.publish(null, function (){ 
+	  return Meteor.roles.find({});
+	});

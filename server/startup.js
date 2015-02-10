@@ -17,6 +17,16 @@ Meteor.startup(function () {
 		console.log('does this happen');
 	};
 	*/
+  //create roles using https://atmospherejs.com/alanning/roles
+
+  if(!Meteor.roles.findOne({name: "user"}))
+  Roles.createRole("user");
+  if(!Meteor.roles.findOne({name: "admin"}))
+  Roles.createRole("admin");
+  if(!Meteor.roles.findOne({name: "superadmin"}))
+  Roles.createRole("superadmin");
+
+
 });
 
 
