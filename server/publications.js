@@ -11,19 +11,20 @@
     	return Organizations.find();
     });
 
-
+	//this doesn't work, I don't know why
 	Meteor.publish('organizationsUsers', function(org) {
-	    var organization = profile.organization;
-	    //http://stackoverflow.com/questions/27299994/meteor-users-find-not-returning-in-publish
-	    // this is not quite right:
-	    return Meteor.users.find({}, {$match:{organization: 'Company A'}});
+	    //return Meteor.users.find({'profile.orgId': user});
 	}); 
 
 	Meteor.publish('users', function() {
-		return Meteor.users.find();
+		return Meteor.users.find({}, {fields: {emails: 1, profile: 1, username:1, roles: 1}});
 	});
 
 	// in server/publish.js
 	Meteor.publish(null, function (){ 
 	  return Meteor.roles.find({});
 	});
+
+
+
+// http://stackoverflow.com/questions/19391308/custom-fields-on-meteor-users-not-being-published

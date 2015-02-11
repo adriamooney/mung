@@ -29,6 +29,10 @@ Template.account.events({
 
 });
 
+Template.account.rendered = function() {
+    //console.log(this.data); // you should see your passage object in the console
+};
+
 Template.account.helpers({
 	getAllRoles: function() {
 		return Meteor.roles.find();
@@ -37,8 +41,23 @@ Template.account.helpers({
 		var id = Meteor.userId();
 		var user = Meteor.users.findOne({_id:Meteor.userId()});
 		return user.roles[0];
-	}
+	},
+    isChecked: function(context) {
+    	var r = Router.current().url;
+    	var a = r.split('/');
+    	var id = a.pop();
+
+    	var user = Meteor.users.findOne({_id:id});
+
+    	if (this.name == user.roles[0]) {
+    		return true;
+    	}
+    }
+
 });
+
+
+
 
 //http://stackoverflow.com/questions/23507384/adding-more-fields-to-meteor-user-accounts
 

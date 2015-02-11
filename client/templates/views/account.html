@@ -8,7 +8,7 @@
                     <div class="form-group">
                         <label for="email" class="col-lg-2 control-label">Email</label>
                         <div class="col-lg-6">
-                            <input type="text" class="form-control" name="email" value="{{currentUser.emails.[0].address}}" disabled="disabled" readonly="readonly" />
+                            <input type="text" class="form-control" name="email" value="{{this.emails.[0].address}}" disabled="disabled" readonly="readonly" />
                         </div>
                     </div>
 
@@ -16,25 +16,26 @@
                     <div class="form-group">
                         <label for="displayName" class="col-lg-2 control-label">Full Name</label>
                          <div class="col-lg-6">
-                            <input type="text" class="form-control" name="displayName" placeholder="Full Name" value="{{currentUser.profile.name}}" />
+                            <input type="text" class="form-control" name="displayName" placeholder="Full Name" value="{{this.profile.name}}" />
                         </div>
                     </div>
+                    <!--Accounts.changePassword(oldPassword, newPassword, [callback])-->
 
+                    {{#if isInRole 'admin,superadmin'}}
                     <div class="form-group">
-                        <label for="displayName" class="col-lg-2 control-label">Account Type</label>
+                        <label for="displayName" class="col-lg-2 control-label">User Type</label>
                          <div class="col-lg-6">
                             {{#each getAllRoles}}
-        
                                 <div class="radio">
                                     <label>
-                                      <input type="radio" name="role" value="{{name}}" checked="">
+                                      <input type="radio" name="role" value="{{name}}" checked="{{isChecked}}">
                                       {{name}}
                                     </label>
                                 </div>
                             {{/each}}
-                            <input type="text" class="form-control" name="accountType" value="{{getRole}}" />
                         </div>
                     </div>
+                    {{/if}}
 
                     <div class="form-group">
                         <div class="col-lg-6 col-lg-offset-2">

@@ -18,7 +18,10 @@
           </ul>
           <ul class="nav navbar-nav">
           <!--spacebars equivalent of Meter.user()-->
+          {{#if currentUser.profile.orgName}}<li><a href="/organization/{{currentUser.profile.orgId}}">{{currentUser.profile.orgName}}</a></li>{{/if}}
           {{#if currentUser}}<li><a href="/account/{{currentUser._id}}">Account</a></li>{{/if}}
+
+          {{#if isInRole 'superadmin'}}<li><a href="/admin">Admin</a></li>{{/if}}
         </ul>
         </div>
       </div>

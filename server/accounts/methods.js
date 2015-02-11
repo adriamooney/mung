@@ -7,6 +7,11 @@ Meteor.methods({
 		Roles.setUserRoles(userId, role);
 
 		//users.update(userId, {$set: {name: displayName} } );
+	},
+	addNewUser: function(email, profile) {
+
+	    var userId = Accounts.createUser({email: email, password: 'asdfasdf', profile: profile});
+    	Accounts.sendEnrollmentEmail(userId);
 
 	}
 });

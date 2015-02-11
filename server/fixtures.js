@@ -15,11 +15,24 @@ if (Collections.find().count() === 0) {
     var tomId = Meteor.users.insert({
         emails: [
         // each email address can only belong to one user.
-            { address: "balasdf@blah.com", verified: false },
+            { address: "tom@boo.com", verified: true },
         ],
         profile: { 
             name: 'Tom Jones',
-            organization: 'Company A',
+            organization: 'i6ttWn6CALg4NMRsR',
+            accountType: 'user',
+            accountStatus: 'active'
+        }
+    });
+
+    Meteor.users.insert({
+        emails: [
+        // each email address can only belong to one user.
+            { address: "bob@boo.com", verified: true },
+        ],
+        profile: { 
+            name: 'Bob Smith',
+            organization: 'i6ttWn6CALg4NMRsR',
             accountType: 'user',
             accountStatus: 'active'
         }
