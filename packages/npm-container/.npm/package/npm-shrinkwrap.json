@@ -16,6 +16,9 @@
           "version": "0.0.6"
         }
       }
+    },
+    "csv-parse": {
+      "version": "0.0.6"
     }
   }
 }
