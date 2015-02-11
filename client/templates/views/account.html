@@ -33,6 +33,15 @@
                                     </label>
                                 </div>
                             {{/each}}
+                            {{# if isInRole 'superadmin'}}
+                             <div class="radio">
+                                <label>
+                                  <input type="radio" name="role" value="{{getSuperAdmin}}" checked="{{isCheckedAdmin}}">
+                                {{getSuperAdmin}}
+                                </label>
+                            </div>
+                            {{/if}}
+                            
                         </div>
                     </div>
                     {{/if}}

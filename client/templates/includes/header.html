@@ -15,14 +15,20 @@
         <div class="collapse navbar-collapse" id="navigation">
           <ul class="nav navbar-nav navbar-right">
             {{> loginButtons}}
-          </ul>
-          <ul class="nav navbar-nav">
-          <!--spacebars equivalent of Meter.user()-->
-          {{#if currentUser.profile.orgName}}<li><a href="/organization/{{currentUser.profile.orgId}}">{{currentUser.profile.orgName}}</a></li>{{/if}}
-          {{#if currentUser}}<li><a href="/account/{{currentUser._id}}">Account</a></li>{{/if}}
+            <!--spacebars equivalent of Meter.user()-->
+           
 
-          {{#if isInRole 'superadmin'}}<li><a href="/admin">Admin</a></li>{{/if}}
-        </ul>
+            
+            <li>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> <span class="fa fa-cog"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                  {{#if currentUser.profile.orgName}}{{#if isInRole 'admin,superadmin'}}<li><a href="/organization/{{currentUser.profile.orgId}}">{{currentUser.profile.orgName}}</a></li>{{/if}}{{/if}}
+                  {{#if currentUser}}<li><a href="/account/{{currentUser._id}}">Account</a></li>{{/if}}
+                  {{#if isInRole 'superadmin'}}<li><a href="/admin">Admin</a></li>{{/if}}
+                </ul>
+            </li>
+          </ul>
+
         </div>
       </div>
     </div>

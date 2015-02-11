@@ -7,3 +7,10 @@ Template.admin.helpers({
 	}
 });
 
+/*Template.admin.events({
+	'click .org-name': function(e) {
+		e.preventDefault();
+		console.log(this);
+	}
+}); */
+

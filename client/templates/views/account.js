@@ -21,7 +21,7 @@ Template.account.events({
 				throwError('This link has already been posted'); */
 			console.log('success');
 			AppMessages.throw('your account was updated', 'success');
-			Router.go('/');
+			//Router.go('/');
 
 		});
 		
@@ -35,7 +35,11 @@ Template.account.rendered = function() {
 
 Template.account.helpers({
 	getAllRoles: function() {
-		return Meteor.roles.find();
+		return Meteor.roles.find( { name: { $not: 'superadmin' } });
+	},
+	getSuperAdmin: function() {
+		var superadmin = Meteor.roles.findOne( { name: 'superadmin' });
+		return superadmin.name;
 	},
 	getRole: function() {
 		var id = Meteor.userId();
@@ -43,13 +47,27 @@ Template.account.helpers({
 		return user.roles[0];
 	},
     isChecked: function(context) {
+    	//use the router to get the user's id
     	var r = Router.current().url;
     	var a = r.split('/');
     	var id = a.pop();
-
     	var user = Meteor.users.findOne({_id:id});
 
     	if (this.name == user.roles[0]) {
+    		return true;
+    	}
+    },
+    isCheckedAdmin: function() {
+    	var r = Router.current().url;
+    	var a = r.split('/');
+    	var id = a.pop();
+    	var user = Meteor.users.findOne({_id:id});
+
+    	console.log(this.roles[0]);
+
+    	console.log(user.roles[0]);
+
+    	if (this.roles[0] == 'superadmin') {
     		return true;
     	}
     }

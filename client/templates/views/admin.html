@@ -10,9 +10,9 @@
 		</tr>
 	{{#each user}}
 		<tr>
-			<td>{{profile.name}}</td>
-			<td>{{emails.[0].address}}</td>
-			<td>{{profile.orgName}}</td>
+			<td><a href="/account/{{_id}}">{{profile.name}}</a></td>
+			<td><a href="/account/{{_id}}">{{emails.[0].address}}</a></td>
+			<td class="org-name">{{profile.orgName}}</td>
 			<td>{{roles.[0]}}</td>
 			<td>{{profile.accountStatus}}</td>
 		</tr>
