@@ -10,8 +10,8 @@ Meteor.startup(function () {
     finished: function(file_info) {
       // GET USER INFO HERE
       // then pass it along to the csv_to_json (so we know who to associate files with)
-      var user_info = {};
-    	MungCSV.csv_to_json(file_info, user_info);
+
+      MungCSV.csv_to_json(file_info);
     }
   });
 
