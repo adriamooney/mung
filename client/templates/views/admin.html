@@ -1,0 +1,54 @@
+<template name="admin">
+	<h2>All Users</h2>
+	<table class="table table-striped table-hover">
+		<tr>
+			<th>Full Name</th>
+			<th>Email</th>
+			<th>Organization</th>
+			<th>User Type</th>
+			<th>Account Status</th>
+		</tr>
+	{{#each user}}
+		<tr>
+			<td><a href="/account/{{_id}}">{{profile.name}}</a></td>
+			<td><a href="/account/{{_id}}">{{emails.[0].address}}</a></td>
+			<td class="org-name">{{profile.orgName}}</td>
+			<td>{{roles.[0]}}</td>
+			<td>{{profile.accountStatus}}</td>
+		</tr>
+	{{/each}}
+	</table>
+
+	<h2>All Organizations</h2>
+	<table class="table table-striped table-hover">
+		<tr>
+			<th>Organization</th>
+			<th>Organization ID</th>
+		</tr>
+	{{#each organization}}
+		<tr>
+			<td><a href="/organization/{{_id}}">{{name}}</a></td>
+			<td>{{_id}}</td>
+		</tr>
+	{{/each}}
+	</table>
+
+	<div class="well">
+		{{>newOrganizationForm}}
+	</div>
+
+	<h2>All Plans</h2>
+	<table class="table table-striped table-hover">
+		<tr>
+			<th>Name</th>
+			<th>Code</th>
+		</tr>
+	{{#each plan}}
+		<tr>
+			<td>{{name}}</td>
+			<td>{{code}}</td>
+		</tr>
+	{{/each}}
+	</table>
+
+</template>

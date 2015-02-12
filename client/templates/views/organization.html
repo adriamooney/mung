@@ -1,0 +1,59 @@
+<template name="organization">
+	<h2>{{name}} Management {{plan}}</h2>
+	<table class="table">
+		<tr>
+			<th>Full Name</th>
+			<th>Email</th>
+			<th>User Type</th>
+			<th>Account Status</th>
+			<th>Organization</th>
+			<th>Organization ID</th>
+		</tr>
+	{{#each user}}
+		<tr>
+			<td><a href="/account/{{_id}}">{{profile.name}}</a></td>
+			<td><a href="/account/{{_id}}">{{emails.[0].address}}</a></td>
+			<td>{{roles.[0]}}</td>
+			<td>{{profile.accountStatus}}</td>
+			<td>{{profile.orgName}}</td>
+			<td>{{profile.orgId}}</td>
+		</tr>
+	{{/each}}
+	</table>
+
+	<form class="form-horizontal">
+            <fieldset>
+            <legend>Add New User</legend>
+                <div class="form-group">
+                   
+                    <div class="form-group">
+                        <label for="email" class="col-lg-2 control-label">Email</label>
+                        <div class="col-lg-6">
+                            <input type="text" class="form-control" name="email" placeholder="Email" />
+                        </div>
+                    </div>
+
+                   
+                    <div class="form-group">
+                        <label for="displayName" class="col-lg-2 control-label">Full Name</label>
+                         <div class="col-lg-6">
+                            <input type="text" class="form-control" name="displayName" placeholder="Full Name" value="" />
+                        </div>
+                    </div>
+
+                    <input type="hidden" name="orgId" value="{{_id}}" />
+                    <input type="hidden" name="orgName" value="{{name}}" />
+                    <input type="hidden" name="accountCode" value="{{code}}" />
+
+
+                    <div class="form-group">
+                        <div class="col-lg-6 col-lg-offset-2">
+                          <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </div>
+
+                </div>
+            </fieldset>
+    </form>
+
+</template>
