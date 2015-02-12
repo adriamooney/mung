@@ -3,8 +3,9 @@ Template.newOrganizationForm.events({
 		e.preventDefault();
 
 		var displayName =  e.target.displayName.value;
+		var accountCode = e.target.accountCode.value;
 
-		Meteor.call('addNewOrganization', displayName, function(error, result) {
+		Meteor.call('addNewOrganization', displayName, accountCode, function(error, result) {
 
 			console.log('success');
 			AppMessages.throw('new organization created', 'success');
@@ -14,4 +15,10 @@ Template.newOrganizationForm.events({
 		
 	}
 
+});
+
+Template.newOrganizationForm.helpers({
+	plan: function() {
+		return AccountPlans.find();
+	}
 });

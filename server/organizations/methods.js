@@ -1,9 +1,10 @@
 Meteor.methods({
 
-	addNewOrganization: function(name) {
+	addNewOrganization: function(name, accountCode) {
 
 		Organizations.insert({
-			name: name
+			name: name,
+			accountCode: accountCode
 		});
 
 	}

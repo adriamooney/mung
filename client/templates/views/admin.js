@@ -4,6 +4,9 @@ Template.admin.helpers({
 	},
 	organization: function() {
 		return Organizations.find();
+	},
+	plan: function() {
+		return AccountPlans.find();
 	}
 });
 

@@ -11,21 +11,16 @@ Meteor.startup(function () {
     	MungCSV.csv_to_json(file_info);
     }
   });
-  // FILE UPLOAD CALLBACK
- /* Uploader.finished = function(fileInfo, templateContext) {
-		//Uploads.insert(fileInfo);
-		console.log('does this happen');
-	};
-	*/
+
   //create roles using https://atmospherejs.com/alanning/roles
 
   if(!Meteor.roles.findOne({name: "user"}))
-  Roles.createRole("user");
+    Roles.createRole("user");
   if(!Meteor.roles.findOne({name: "admin"}))
-  Roles.createRole("admin");
+    Roles.createRole("admin");
   if(!Meteor.roles.findOne({name: "superadmin"}))
-  Roles.createRole("superadmin");
-
+    Roles.createRole("superadmin");
+      
 
 });
 

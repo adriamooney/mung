@@ -37,4 +37,18 @@
 		{{>newOrganizationForm}}
 	</div>
 
+	<h2>All Plans</h2>
+	<table class="table table-striped table-hover">
+		<tr>
+			<th>Name</th>
+			<th>Code</th>
+		</tr>
+	{{#each plan}}
+		<tr>
+			<td>{{name}}</td>
+			<td>{{code}}</td>
+		</tr>
+	{{/each}}
+	</table>
+
 </template>

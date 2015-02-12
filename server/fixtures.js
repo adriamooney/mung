@@ -4,7 +4,8 @@ if (Collections.find().count() === 0) {
     var now = new Date().getTime();
 
     var orgId = Organizations.insert({
-        name: 'Ikea'
+        name: 'Mung',
+        accountCode: 4
     });
 
     var org = Organizations.findOne(orgId);
@@ -14,32 +15,36 @@ if (Collections.find().count() === 0) {
     var tomId = Meteor.users.insert({
         emails: [
         // each email address can only belong to one user.
-            { address: "tomsuper@tom.com", verified: true },
+            { address: "adriamooney+mung@gmail.com", verified: true },
         ],
         profile: { 
-            name: 'Tom Jones',
+            name: 'Adria Mooney',
             orgName: org.name,
             orgId: org._id,
-            accountType: 'user',
+            accountCode: org.accountCode,
             accountStatus: 'active'
         },
         roles: ['superadmin']
     });
 
-    Meteor.users.insert({
+    var bobId = Meteor.users.insert({
         emails: [
         // each email address can only belong to one user.
-            { address: "bobadmin@bob.com", verified: true },
+            { address: "james.dipadua+mung@gmail.com", verified: true },
         ],
         profile: { 
-            name: 'Bob Smith',
+            name: 'James DiPadua',
             orgName: org.name,
             orgId: org._id,
-            accountType: 'admin',
+            accountCode: org.accountCode,
             accountStatus: 'active'
         },
-        roles: ['admin']
+        roles: ['superadmin']
     });
+
+    Accounts.setPassword(tomId, 'asdfasdf');
+    Accounts.setPassword(bobId, 'asdfasdf');
+
 
     var tom = Meteor.users.findOne(tomId);
 
@@ -80,4 +85,30 @@ if (Collections.find().count() === 0) {
             }
         ]
     });
+
+    //create plans.  
+    if(!AccountPlans.findOne({code: 1})) {
+        AccountPlans.insert({
+            name: 'Free',
+            code: 1
+          });
+    }
+    if(!AccountPlans.findOne({code: 2})) {
+        AccountPlans.insert({
+            name: 'Non Profit',
+            code: 2
+          });
+    }
+    if(!AccountPlans.findOne({code: 3})) {
+        AccountPlans.insert({
+            name: 'Business Lite',
+            code: 3
+          });
+    }
+    if(!AccountPlans.findOne({code: 4})) {
+        AccountPlans.insert({
+            name: 'Enterprise',
+            code: 4
+          });
+    }
 }

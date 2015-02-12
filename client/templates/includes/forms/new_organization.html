@@ -12,6 +12,17 @@
                         </div>
                     </div>
 
+                    <div class="form-group">
+                        <label for="accountPlan" class="col-lg-2 control-label">Account Plan</label>
+                        <div class="col-lg-6">
+                            <select class="form-control" name="accountCode">
+                                {{#each plan}}
+                                    <option value="{{code}}">{{name}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                    </div>
+
 
                     <div class="form-group">
                         <div class="col-lg-6 col-lg-offset-2">

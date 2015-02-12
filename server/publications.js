@@ -12,7 +12,7 @@
     });
 
 	//this doesn't work, I don't know why
-	Meteor.publish('organizationsUsers', function(org) {
+	Meteor.publish('organizationsUsers', function() {
 	    //return Meteor.users.find({'profile.orgId': user});
 	}); 
 
@@ -23,6 +23,10 @@
 	// in server/publish.js
 	Meteor.publish(null, function (){ 
 	  return Meteor.roles.find({});
+	});
+
+	Meteor.publish('accountplans', function() {
+		return AccountPlans.find();
 	});
 
 

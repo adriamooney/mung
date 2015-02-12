@@ -1,5 +1,5 @@
 <template name="organization">
-	<h2>{{name}} Management</h2>
+	<h2>{{name}} Management {{plan}}</h2>
 	<table class="table">
 		<tr>
 			<th>Full Name</th>
@@ -43,6 +43,7 @@
 
                     <input type="hidden" name="orgId" value="{{_id}}" />
                     <input type="hidden" name="orgName" value="{{name}}" />
+                    <input type="hidden" name="accountCode" value="{{code}}" />
 
 
                     <div class="form-group">

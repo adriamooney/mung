@@ -1,14 +1,34 @@
 Template.organization.helpers({
 	user: function() {
 		var orgId = this._id;
-		//var orgId = Organizations.findOne();
-		//TODO; 'COMPANY A' must be dynamic with an id that matches the current organization's id
 		return Meteor.users.find({'profile.orgId': orgId});
+	},
+	plan: function() {
+		var plans = AccountPlans.find().fetch();
+		var accountCode = this.accountCode;
+
+		_.each(plans, function(plan) {
+
+			if (plan.code == accountCode) {
+				var planName = plan.name;
+				console.log(planName);
+				//return planName;
+				//TODO: this is not working
+				return PlanName;
+			}
+
+
+		});
+
+
+
 	}
 });
 
 
 Template.organization.events({
+
+	//Add New User to organization
 	'submit form': function(e) {
 		e.preventDefault();
 		
@@ -17,7 +37,9 @@ Template.organization.events({
 		var profile = {
 			name :  e.target.displayName.value,
 			orgId : e.target.orgId.value,
-			orgName : e.target.orgName.value
+			orgName : e.target.orgName.value,
+			accountStatus: 'active',
+			accountCode: e.target.accountCode.value
 
 		}
 
