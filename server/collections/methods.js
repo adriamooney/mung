@@ -8,7 +8,9 @@ Meteor.methods({
 	convert_CSV: function(file_info){
 		MungCSV.csv_to_json(file_info);
 		console.log(MungCSV);
-//		var csv_data = MungCSV.csv_data;
+		console.log(MungCSV.csv_data);
+
+
 //		console.log(csv_data);
 		//return file_data;
 	}
