@@ -41,11 +41,6 @@ Template.account.helpers({
 		var superadmin = Meteor.roles.findOne( { name: 'superadmin' });
 		return superadmin.name;
 	},
-	getRole: function() {
-		var id = Meteor.userId();
-		var user = Meteor.users.findOne({_id:Meteor.userId()});
-		return user.roles[0];
-	},
     isChecked: function(context) {
     	//use the router to get the user's id
     	var r = Router.current().url;
@@ -63,13 +58,30 @@ Template.account.helpers({
     	var id = a.pop();
     	var user = Meteor.users.findOne({_id:id});
 
-    	console.log(this.roles[0]);
-
-    	console.log(user.roles[0]);
-
     	if (this.roles[0] == 'superadmin') {
     		return true;
     	}
+    },
+    getPlan: function() {
+    	var r = Router.current().url;
+    	var a = r.split('/');
+    	var id = a.pop();
+    	var user = Meteor.users.findOne({_id:id});
+    	var plans = AccountPlans.find().fetch();
+    	// QUESTION, is it bad to make more than one database request on the page for the same exact thing?  is there a better way to do this?
+    	// (see how isCheckedAdmin above also requests the user)
+		var accountCode = user.profile.accountCode;
+
+		var planName;
+		_.each(plans, function(plan) {
+		
+			if (plan.code == accountCode) {
+				planName = plan.name;
+			}
+
+		});
+
+		return planName;
     }
 
 });

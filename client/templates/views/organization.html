@@ -1,5 +1,7 @@
 <template name="organization">
-	<h2>{{name}} Management {{plan}}</h2>
+	<div class="page-header">
+        <h1>{{name}} Management <small><sup class="label label-info">{{plan}}</sup></small></h1>
+    </div>
 	<table class="table">
 		<tr>
 			<th>Full Name</th>
@@ -7,7 +9,7 @@
 			<th>User Type</th>
 			<th>Account Status</th>
 			<th>Organization</th>
-			<th>Organization ID</th>
+			<th>Account Plan</th>
 		</tr>
 	{{#each user}}
 		<tr>
@@ -16,7 +18,7 @@
 			<td>{{roles.[0]}}</td>
 			<td>{{profile.accountStatus}}</td>
 			<td>{{profile.orgName}}</td>
-			<td>{{profile.orgId}}</td>
+			<td>{{userPlan}}</td>
 		</tr>
 	{{/each}}
 	</table>
@@ -43,7 +45,7 @@
 
                     <input type="hidden" name="orgId" value="{{_id}}" />
                     <input type="hidden" name="orgName" value="{{name}}" />
-                    <input type="hidden" name="accountCode" value="{{code}}" />
+                    <input type="hidden" name="accountCode" value="{{accountCode}}" />
 
 
                     <div class="form-group">
