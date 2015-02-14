@@ -3,8 +3,15 @@
 		<h4>{{title}}</h4>
 		<i class="fa fa-cog options-toggle"></i>
 		<div class="options">
-			<div class="label label-primary">Summary</div>
-			<div class="label label-primary">Properties</div>
+			<div class="label label-primary summary">Summary</div>
+			<div class="label label-primary properties-toggle">Properties</div>
+			<div>
+				
+				{{#each properties}}
+					{{this}}
+				{{/each}}
+
+			</div>
 			<div class="label label-danger remove-canvas-item"><i class="fa fa-times"></i> Remove</div>
 		</div>
 	</div>  {{/if}}

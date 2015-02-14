@@ -15,22 +15,16 @@ Template.canvasItem.events({
 
 });
 
-
 Template.canvas.rendered = function() {
-	//this object needs to be a variable that is populated by the id's of the selected collections, then we need to render the canvasItem template for each one
-	
-		console.log(Collections.find().count());
 
-		var p = Session.get('selectedCollection');
-
+		var selected_collection = Session.get('selectedCollection');
 
 		var canvas = document.getElementById('canvas');
-		if(p) {
-			for (var key in p) {
-			  if (p.hasOwnProperty(key)) {
+		if(selected_collection) {
+			for (var key in selected_collection) {
+			  if (selected_collection.hasOwnProperty(key)) {
 
-			    var data = Collections.findOne({_id: p[key]});
-
+			    var data = Collections.findOne({_id: selected_collection[key]});
 
 			    Blaze.renderWithData(Template.canvasItem, data, canvas);
 			  }
@@ -38,3 +32,19 @@ Template.canvas.rendered = function() {
 		}
 
 }
+
+Template.canvasItem.helpers({
+	properties: function() {
+		console.log(this.file_data.properties);
+		var props_obj = this.file_data.properties;
+		var property_array = [];
+		if(props_obj){
+			for(var key in props_obj) {
+				if(props_obj.hasOwnProperty(key)) {
+					property_array.push(props_obj[key]);
+				}
+			}
+		}
+		return property_array;
+	}
+});
