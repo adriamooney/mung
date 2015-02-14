@@ -9,10 +9,10 @@ Meteor.startup(function () {
     var user_id = Meteor.userId();
     var user = Meteor.users.findOne({_id: user_id});
     file_info.user_id = user_id;
-	file_info.org_id = user.orgId;
-	file_info.org_name = user.orgName;
-	file_info.dt_added = new Date();
-	
+    file_info.org_id = user.orgId;
+    file_info.org_name = user.orgName;
+    file_info.dt_added = new Date();
+    	
     Meteor.call('convert_CSV', file_info);
 
   }
