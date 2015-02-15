@@ -12,13 +12,13 @@ Template.collectionsList.helpers({
 
 Template.collectionsList.events({
 	'click li': function(e) {
-		//console.log(this._id);
 
+		//This gets the id of the selectedCollection and adds it to an object to be saved in the session variable 'selectedItems';
 
 		var collectionId = this._id;
-		console.log(collectionId);
+		//console.log(collectionId);
 		var data = Collections.findOne({_id: this._id});
-		console.log(data);
+		//console.log(data);
 		var canvas = document.getElementById('canvas');
 
 		var selectedItems = Session.get('selectedCollection', selectedItems);
@@ -28,14 +28,7 @@ Template.collectionsList.events({
 
 		selectedItems[collectionId] = collectionId;
         Session.set('selectedCollection', selectedItems);
-        console.log(Session.get('selectedCollection'));
-
-		
-		//return Session.set('selectedCollections', selectedItems);
-
-		//var curr = e.currentTarget;
-
-		//return Session.set('selectedCollections', selectedItems);
+        //console.log(Session.get('selectedCollection'));
 
 		Blaze.renderWithData(Template.canvasItem, data, canvas);
 	}

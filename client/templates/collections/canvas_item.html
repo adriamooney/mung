@@ -5,11 +5,16 @@
 		<div class="options">
 			<div class="label label-primary summary">Summary</div>
 			<div class="label label-primary properties-toggle">Properties</div>
-			<div>
-				
+			<div class="properties"><i class="fa fa-times close-properties"></i>
+				<form>
 				{{#each properties}}
-					{{this}}
+					<div class="checkbox">
+                        <label>
+                          <input class="property-checkbox" type="checkbox" value="{{this}}" checked/> {{this}}
+                        </label>
+                      </div>
 				{{/each}}
+				</form>
 
 			</div>
 			<div class="label label-danger remove-canvas-item"><i class="fa fa-times"></i> Remove</div>
