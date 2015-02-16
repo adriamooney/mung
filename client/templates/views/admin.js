@@ -5,8 +5,8 @@ Template.plans.helpers({
 	
 });
 
-Template.orgPlan.helpers({
-	orgPlan: function() {
+Template.orgAccountPlan.helpers({
+	orgAccountPlan: function() {
 		var plans = AccountPlans.find().fetch();
 		var accountCode = this.accountCode;
 		var planName;
@@ -39,7 +39,7 @@ Template.orgTable.helpers({
             	}  
 
             },
-    		{ key: 'orgPlan', label: 'Account Plan', tmpl: Template.orgPlan }
+    		{ key: 'orgAccountPlan', label: 'Account Plan', tmpl: Template.orgAccountPlan }
 
             ]
         };
