@@ -11,14 +11,14 @@ Template.collectionsList.helpers({
 } */
 
 Template.collectionsList.events({
-	'click li': function(e) {
-		//console.log(this._id);
+	'click .collection-list-item': function(e) {
 
+		//This gets the id of the selectedCollection and adds it to an object to be saved in the session variable 'selectedItems';
 
 		var collectionId = this._id;
-		console.log(collectionId);
+		//console.log(collectionId);
 		var data = Collections.findOne({_id: this._id});
-		console.log(data);
+		//console.log(data);
 		var canvas = document.getElementById('canvas');
 
 		var selectedItems = Session.get('selectedCollection', selectedItems);
@@ -28,17 +28,57 @@ Template.collectionsList.events({
 
 		selectedItems[collectionId] = collectionId;
         Session.set('selectedCollection', selectedItems);
-        console.log(Session.get('selectedCollection'));
+        //console.log(Session.get('selectedCollection'));
 
+        //render the canvasItem template into the canvas
+        var canvasItem = document.getElementById('canvas-item-'+this._id);
+        if(!canvasItem) {
+        	Blaze.renderWithData(Template.canvasItem, data, canvas);
+        }
 		
-		//return Session.set('selectedCollections', selectedItems);
+	},
+	'click .settings-toggle': function(e) {
+		//this function is redundant to ones in canvas_item.js.  need to make global functions instead, and call them here
+		var optionsDiv = e.currentTarget.nextElementSibling;
+		optionsDiv.style.display = (optionsDiv.style.display != 'block' ? 'block' : 'none');
+	},
+	'click .delete': function() {
+		var collection = Collections.findOne({_id: this._id});
+		Meteor.call('removeCollection', collection);
+		console.log('collection removed');
+	},
+	/*'click .edit': function(e) {
+		var el = e.currentTarget;
+		var currInput = $(el).parent().find('input');
+		console.log(currInput);
+		$(currInput).focus();
+	}, */
+	'submit form': function(e) {
+		e.preventDefault();
+		var el = e.currentTarget;
+		var id = this._id;
 
-		//var curr = e.currentTarget;
+		var title = this.title;
 
-		//return Session.set('selectedCollections', selectedItems);
+		var currVal = $(el).parent().find('input');
+		var newVal = currVal[0].value;
+		var canvasName = document.getElementById('canvas-item-title-'+this._id);
 
-		Blaze.renderWithData(Template.canvasItem, data, canvas);
-	}
+		//update name
+		Meteor.call('updateCollectionName', id, newVal, function() {
+
+			//this doesn't really update the canvas item template {{title}}, it's just in the dom
+			canvasName.innerHTML = newVal;
+		});
+
+
+	},
+	'click .close': function(e) {
+		e.currentTarget.parentElement.style.display = 'none';
+	},
+	'blur .edit-name': function(e) {
+		e.currentTarget.style.border = 'none';
+	} 
 });
 
 

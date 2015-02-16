@@ -25,12 +25,36 @@ Template.account.events({
 
 		});
 		
+	},
+	'change #accountStatus': function(e) {
+
+		var checked = e.currentTarget.checked;
+		
+		var accountStatus = this.profile.accountStatus;
+		var id = this._id;
+		if(checked == true) {
+			console.log('checked');
+			Meteor.call('updateAccountStatus', id, 'active');
+			
+		}
+		else {
+			console.log('unchecked');
+			Meteor.call('updateAccountStatus', id, 'inactive');
+		}
+		console.log(this);
 	}
 
 });
 
 Template.account.rendered = function() {
     //console.log(this.data); // you should see your passage object in the console
+    //use the router to get the user's id
+    var r = Router.current().url;
+	var a = r.split('/');
+	var id = a.pop();
+	var user = Meteor.users.findOne({_id:id});
+
+    Session.set('user', user);
 };
 
 Template.account.helpers({
@@ -42,31 +66,21 @@ Template.account.helpers({
 		return superadmin.name;
 	},
     isChecked: function(context) {
-    	//use the router to get the user's id
-    	var r = Router.current().url;
-    	var a = r.split('/');
-    	var id = a.pop();
-    	var user = Meteor.users.findOne({_id:id});
+    	var user = Session.get('user');
 
     	if (this.name == user.roles[0]) {
     		return true;
     	}
     },
     isCheckedAdmin: function() {
-    	var r = Router.current().url;
-    	var a = r.split('/');
-    	var id = a.pop();
-    	var user = Meteor.users.findOne({_id:id});
+    	var user  = Session.get('user');
 
     	if (this.roles[0] == 'superadmin') {
     		return true;
     	}
     },
     getPlan: function() {
-    	var r = Router.current().url;
-    	var a = r.split('/');
-    	var id = a.pop();
-    	var user = Meteor.users.findOne({_id:id});
+    	var user = Session.get('user');
     	var plans = AccountPlans.find().fetch();
     	// QUESTION, is it bad to make more than one database request on the page for the same exact thing?  is there a better way to do this?
     	// (see how isCheckedAdmin above also requests the user)
@@ -82,6 +96,15 @@ Template.account.helpers({
 		});
 
 		return planName;
+    },
+    activeStatus: function() {
+    	var status = this.profile.accountStatus;
+    	if(status == 'active') {
+    		return true;
+    	}
+    	else {
+    		return false;
+    	}
     }
 
 });

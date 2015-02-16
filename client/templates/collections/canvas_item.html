@@ -1,10 +1,22 @@
 <template name="canvasItem">
-	{{# if currentUser }}<div class="canvas-item" id="{{_id}}">
-		<h4>{{title}}</h4>
+	{{# if currentUser }}<div class="canvas-item" id="canvas-item-{{_id}}">
+		<h4 id="canvas-item-title-{{_id}}">{{title}}</h4>
 		<i class="fa fa-cog options-toggle"></i>
 		<div class="options">
-			<div class="label label-primary">Summary</div>
-			<div class="label label-primary">Properties</div>
+			<div class="label label-primary summary">Summary</div>
+			<div class="label label-primary properties-toggle">Properties</div>
+			<div class="properties"><i class="fa fa-times close-properties"></i>
+				<form>
+				{{#each properties}}
+					<div class="checkbox">
+                        <label>
+                          <input class="property-checkbox" type="checkbox" value="{{this}}" checked/> {{this}}
+                        </label>
+                      </div>
+				{{/each}}
+				</form>
+
+			</div>
 			<div class="label label-danger remove-canvas-item"><i class="fa fa-times"></i> Remove</div>
 		</div>
 	</div>  {{/if}}
