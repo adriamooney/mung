@@ -3,8 +3,8 @@
 		{{#each collections}}
 			<li><i class="fa fa-cog settings-toggle"></i>  
 				<ul class="settings list-unstyled"><i class="fa fa-times close"></i> 
+					<li><form><input class="edit-name" type="text" id="edit-collection-{{_id}}" value="{{title}}" /><input type="submit" value="Save" class="btn btn-xs btn-primary" /></form></li>
 					<li><span class="delete"><i class="fa fa-trash-o"></i> Remove Collection</span></li>
-					<li><span class="edit"><i class="fa fa-pencil"></i> Rename</span> <input class="edit-name" type="text" id="edit-collection-{{_id}}" value="{{title}}" /></li>
 				</ul>
 				{{>collectionItem}}
 			</li>

@@ -2,9 +2,10 @@ Template.canvasItem.events({
 	'click .options-toggle, click .properties-toggle': function(e) {
 		var optionsDiv = e.currentTarget.nextElementSibling;
 		optionsDiv.style.display = (optionsDiv.style.display != 'block' ? 'block' : 'none');
+		console.log(this);
 	},
 	'click .remove-canvas-item': function(e) {
-		var thisItem = document.getElementById(this._id);
+		var thisItem = document.getElementById('canvas-item-'+this._id);
 		thisItem.parentNode.removeChild(thisItem);
 
 		var obj = Session.get('selectedCollection');
@@ -32,6 +33,8 @@ Template.canvasItem.events({
 });
 
 Template.canvas.rendered = function() {
+	//when canvas is rendered, get all the selected collections ids from the session variable object, 
+	//then render a canvasItem template for each id
 
 	var selected_collection = Session.get('selectedCollection');
 

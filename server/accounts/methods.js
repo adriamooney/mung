@@ -13,5 +13,8 @@ Meteor.methods({
 	    var userId = Accounts.createUser({email: email, password: 'asdfasdf', profile: profile});
     	Accounts.sendEnrollmentEmail(userId);
 
+	},
+	updateAccountStatus: function(id, accountStatus) {
+		Meteor.users.update( {_id: id}, {$set: {'profile.accountStatus': accountStatus}});
 	}
 });

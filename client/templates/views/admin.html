@@ -31,14 +31,14 @@
 		<thead>
 			<tr>
 				<th>Organization</th>
-				<th>Organization ID</th>
+				<th>Account Plan</th>
 			</tr>
 		</thead>
 		<tbody>
 		{{#each organization}}
 			<tr>
 				<td><a href="/organization/{{_id}}">{{name}}</a></td>
-				<td>{{_id}}</td>
+				<td>{{orgPlan}}</td>
 			</tr>
 		{{/each}}
 		</tbody>
