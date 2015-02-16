@@ -33,15 +33,42 @@ Template.account.events({
 		var accountStatus = this.profile.accountStatus;
 		var id = this._id;
 		if(checked == true) {
-			console.log('checked');
 			Meteor.call('updateAccountStatus', id, 'active');
 			
 		}
 		else {
-			console.log('unchecked');
 			Meteor.call('updateAccountStatus', id, 'inactive');
 		}
 		console.log(this);
+	},
+	// <!--Accounts.changePassword(oldPassword, newPassword, [callback])-->
+	'click #change-password-toggle': function(e) {
+		var pwDiv = $('#change-password-div');
+		pwDiv.removeClass('hidden');
+		var thisButton = e.currentTarget;
+		$(thisButton).hide();
+	},
+	'click #cancel-change-password': function() {
+		var pwDiv = $('#change-password-div');
+		pwDiv.addClass('hidden');
+		$('#change-password-toggle').show();
+	},
+	'click #change-password':function(e) {
+		console.log(e.target);
+		var oldPw = $('#currpassword').val();
+		var newPw = $('#newpassword').val();
+		Accounts.changePassword(oldPw, newPw, function(error) {
+			if(error) {
+				AppMessages.throw(error.reason, 'danger');
+			}
+			else {
+				AppMessages.throw('Your password was updated', 'success');
+				var pwDiv = $('#change-password-div');
+				pwDiv.addClass('hidden');
+				$('#change-password-toggle').show();
+			}
+
+		});
 	}
 
 });
@@ -82,8 +109,7 @@ Template.account.helpers({
     getPlan: function() {
     	var user = Session.get('user');
     	var plans = AccountPlans.find().fetch();
-    	// QUESTION, is it bad to make more than one database request on the page for the same exact thing?  is there a better way to do this?
-    	// (see how isCheckedAdmin above also requests the user)
+
 		var accountCode = user.profile.accountCode;
 
 		var planName;

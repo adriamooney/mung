@@ -2,8 +2,10 @@
 	<div class="page-header">
         <h1>Admin</h1>
     </div>
-	<h2>All Users</h2>
-	<table class="table table-striped table-hover">
+	
+	{{>userTable}}
+	
+	<!--<table class="table table-striped table-hover">
 		<thead>
 			<tr>
 				<th>Full Name</th>
@@ -24,10 +26,10 @@
 		</tr>
 	{{/each}}
 		</tbody>
-	</table>
+	</table>-->
 
-	<h2>All Organizations</h2>
-	<table class="table table-striped table-hover">
+	
+	<!--<table class="table table-striped table-hover">
 		<thead>
 			<tr>
 				<th>Organization</th>
@@ -42,12 +44,20 @@
 			</tr>
 		{{/each}}
 		</tbody>
-	</table>
+	</table>-->
+	{{>orgTable}}
 
 	<div class="well">
 		{{>newOrganizationForm}}
 	</div>
 
+	{{>plans}}
+
+	
+
+</template>
+
+<template name="plans">
 	<h2>All Plans</h2>
 	<table class="table table-striped table-hover">
 		<thead>
@@ -65,5 +75,16 @@
 		{{/each}}
 		</tbody>
 	</table>
+</template>
 
+<template name="userTable">
+	<h2>All Users</h2>
+	{{> reactiveTable settings=settings collection=userCollection class="table table-striped table-hover"}}
+</template>
+<template name="orgTable">
+	<h2>All Organizations</h2>
+	{{> reactiveTable settings=settings collection=orgCollection class="table table-striped table-hover"}}
+</template>
+<template name="orgPlan">
+	{{orgPlan}}
 </template>
