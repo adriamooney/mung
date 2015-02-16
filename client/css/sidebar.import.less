@@ -1,5 +1,34 @@
 .collections-list {
-	li {
+	.collection-list-item {
 		cursor:pointer;
+		position:relative;
+	}
+	.settings {
+		display:none;
+		background:@white;
+		position:absolute;
+		z-index:10;
+		padding: 20px 20px 10px 20px;
+		li {
+			padding-bottom: 10px;
+		}
+
+	}
+	.settings-toggle {
+		color: @white;
+	}
+	.edit {
+		cursor:pointer;
+	}
+	.delete {
+		color: @red;
+		cursor:pointer;
+	}
+	.close {
+		color: #000;
+		position:absolute;
+		z-index:11;
+		right:5px;
+		top:5px;
 	}
 }

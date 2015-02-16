@@ -1,25 +1,7 @@
 Template.canvasItem.events({
-	'click .options-toggle': function(e) {
+	'click .options-toggle, click .properties-toggle': function(e) {
 		var optionsDiv = e.currentTarget.nextElementSibling;
 		optionsDiv.style.display = (optionsDiv.style.display != 'block' ? 'block' : 'none');
-		//TODO:  need to save toggle state in session variable
-		//console.log(optionsDiv.style.display);
-		Session.set('optionsToggleState', optionsDiv.style.display);
-		Tracker.autorun(function () {
-		  	Session.get('optionsToggleState');
-		});
-
-	},
-	'click .properties-toggle': function(e) {
-		var optionsDiv = e.currentTarget.nextElementSibling;
-		optionsDiv.style.display = (optionsDiv.style.display != 'block' ? 'block' : 'none');
-		//TODO:  need to save toggle state in session variable
-		//console.log(optionsDiv.style.display);
-		Session.set('propertiesToggleState', optionsDiv.style.display);
-		Tracker.autorun(function () {
-		  	Session.get('propertiesToggleState');
-		});
-
 	},
 	'click .remove-canvas-item': function(e) {
 		var thisItem = document.getElementById(this._id);
@@ -51,29 +33,22 @@ Template.canvasItem.events({
 
 Template.canvas.rendered = function() {
 
-		var selected_collection = Session.get('selectedCollection');
+	var selected_collection = Session.get('selectedCollection');
 
-		var canvas = document.getElementById('canvas');
-		if(selected_collection) {
-			for (var key in selected_collection) {
-			  if (selected_collection.hasOwnProperty(key)) {
+	var canvas = document.getElementById('canvas');
+	if(selected_collection) {
+		for (var key in selected_collection) {
+		  if (selected_collection.hasOwnProperty(key)) {
 
-			    var data = Collections.findOne({_id: selected_collection[key]});
+		    var data = Collections.findOne({_id: selected_collection[key]});
 
-			    Blaze.renderWithData(Template.canvasItem, data, canvas);
-			  }
-			}
+		    Blaze.renderWithData(Template.canvasItem, data, canvas);
+		  }
 		}
+	}
 
 }
 
-//TODO: these need to be used in a different way.  need to take these values and make them actually keep the div open or closed like it should
-Template.canvasItem.rendered = function() {
-	Tracker.autorun(function () {
-		  	console.log(Session.get('propertiesToggleState'));
-		  	console.log(Session.get('optionsToggleState'));
-	});
-}
 
 Template.canvasItem.helpers({
 	properties: function() {
