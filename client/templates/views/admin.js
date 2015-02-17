@@ -49,7 +49,7 @@ Template.orgTable.helpers({
 Template.userTable.helpers({
 	userCollection: function() {
 		//why is the sort not working?
-		return Meteor.users.find({}, {sort: {'profile.name': 'asc'}}); 
+		return Meteor.users.find({}, { sort: { 'profile.name': -1 }}); 
 	},
     settings: function () {
 

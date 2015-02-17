@@ -7,5 +7,8 @@ Meteor.methods({
 			accountCode: accountCode
 		});
 
+	},
+	changePlan: function(id, accountCode) {
+		Organizations.update({_id: id}, {$set: {accountCode: accountCode}});
 	}
 });
