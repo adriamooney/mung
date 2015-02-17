@@ -6,22 +6,19 @@ Template.account.events({
 
 		var role = e.target.role.value;
 
+		var id = this._id;
+
 		//client side validation.  we can also use this function on the server
 		// see lib/collections/posts.js
 		//var errors = validatePost(post);
 		//if(errors.title || errors.url)
 			//return Session.set('postSubmitErrors', errors);
 
-		Meteor.call('accountInfoInsert', displayName, role, function(error, result) {
+		Meteor.call('accountInfoInsert', displayName, role, id, function(error, result) {
 
-			/*if(error)
-				return throwError(error.reason);
-
-			if(result.postExists) //postExists is returned if postWithSameLink is true
-				throwError('This link has already been posted'); */
 			console.log('success');
 			AppMessages.throw('your account was updated', 'success');
-			//Router.go('/');
+
 
 		});
 		
@@ -81,10 +78,18 @@ Template.account.rendered = function() {
 	var id = a.pop();
 	var user = Meteor.users.findOne({_id:id});
 
-    Session.set('user', user);
+    Session.set('accountPageUser', user);
 };
 
 Template.account.helpers({
+	currentUserAccount: function() {
+		var accountPageUser = Session.get('accountPageUser');
+		var user = Meteor.userId();
+
+		if (accountPageUser._id == user) {
+			return true;
+		}
+	},
 	getAllRoles: function() {
 		return Meteor.roles.find( { name: { $not: 'superadmin' } });
 	},
@@ -93,21 +98,21 @@ Template.account.helpers({
 		return superadmin.name;
 	},
     isChecked: function(context) {
-    	var user = Session.get('user');
+    	var user = Session.get('accountPageUser');
 
     	if (this.name == user.roles[0]) {
     		return true;
     	}
     },
     isCheckedAdmin: function() {
-    	var user  = Session.get('user');
+    	var user  = Session.get('accountPageUser');
 
     	if (this.roles[0] == 'superadmin') {
     		return true;
     	}
     },
     getPlan: function() {
-    	var user = Session.get('user');
+    	var user = Session.get('accountPageUser');
     	var plans = AccountPlans.find().fetch();
 
 		var accountCode = user.profile.accountCode;

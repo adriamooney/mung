@@ -1,10 +1,10 @@
 Meteor.methods({
 
-	accountInfoInsert:function(displayName, role) {
-		var userId = Meteor.user()._id;
-		Meteor.users.update({_id:userId}, {$set:{"profile.name":displayName}});
+	accountInfoInsert:function(displayName, role, id) {
+		//var userId = Meteor.user()._id;
+		Meteor.users.update({_id:id}, {$set:{"profile.name":displayName}});
 
-		Roles.setUserRoles(userId, role);
+		Roles.setUserRoles(id, role);
 
 		//users.update(userId, {$set: {name: displayName} } );
 	},
@@ -16,5 +16,8 @@ Meteor.methods({
 	},
 	updateAccountStatus: function(id, accountStatus) {
 		Meteor.users.update( {_id: id}, {$set: {'profile.accountStatus': accountStatus}});
+	},
+	deleteUser: function(id) {
+		Meteor.users.remove(id);
 	}
 });
