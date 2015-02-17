@@ -1,8 +1,4 @@
 Template.organization.helpers({
-	user: function() {
-		var orgId = this._id;
-		return Meteor.users.find({'profile.orgId': orgId});
-	},
 	plan: function() {
 		var plans = AccountPlans.find().fetch();
 		var accountCode = this.accountCode;
@@ -16,10 +12,12 @@ Template.organization.helpers({
 		});
 
 		return planName;
-	},
-	userPlan: function() {
-		//this should be the same as organization level plan, but in case we decide to make these diverge, making it a separate helper
-		//most of this code is duplicated in account.js getPlan
+	}
+
+});
+
+Template.orgPlan.helpers({
+	orgPlan: function() {
 		var plans = AccountPlans.find().fetch();
 		var accountCode = this.profile.accountCode;
 		var planName;
@@ -33,7 +31,39 @@ Template.organization.helpers({
 
 		return planName;
 	}
+});
 
+Template.orgUsers.helpers({
+	orgUsers: function() {
+		var orgId = this._id;
+		var name = 'profile.name';
+		//WHY ISN'T THE SORT WORKING???
+		return Meteor.users.find({'profile.orgId': orgId}, {sort: {name: 1}});
+	},
+    settings: function () {
+
+        return {
+            rowsPerPage: 10,
+            showFilter: true,
+            fields: [
+            { 
+            	key: 'profile.name', 
+            	label: 'Name',
+            	sort: 'descending',
+            	fn: function(value, object){ 
+            		return new Spacebars.SafeString('<a href="/account/'+object._id+'">' +value+ '</a>'); 
+            	} 
+
+            },
+    		{ key: 'emails.0.address', label: 'Email' },
+    		{ key: 'profile.orgName', label: 'Organization' },
+    		{ key: 'orgPlan', label: 'Account Plan', tmpl: Template.orgPlan },
+    		{ key: 'roles.0', label: 'User Type' },
+    		{ key: 'profile.accountStatus', label: 'Account Status' }
+
+            ]
+        };
+    }
 });
 
 

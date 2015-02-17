@@ -4,6 +4,7 @@ adriamooney:bootswatch-cyborg@0.0.1
 alanning:roles@1.2.13
 anti:i18n@0.4.3
 application-configuration@1.0.4
+aslagle:reactive-table@0.6.7
 autoupdate@1.1.5
 base64@1.0.2
 binary-heap@1.0.2
@@ -12,8 +13,7 @@ blaze-tools@1.0.2
 boilerplate-generator@1.0.2
 callback-hook@1.0.2
 check@1.0.4
-clinical:nvd3@0.0.3
-d3js:d3@3.4.13
+d3js:d3@3.5.5
 ddp@1.0.14
 deps@1.0.6
 ejson@1.0.5
@@ -53,6 +53,7 @@ mongo@1.0.11
 natestrauser:font-awesome@4.3.0
 npm-bcrypt@0.7.7
 npm-container@1.0.0
+nvd3:nvd3@1.7.1
 observe-sequence@1.0.4
 ordered-dict@1.0.2
 random@1.0.2

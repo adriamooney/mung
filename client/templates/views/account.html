@@ -26,6 +26,7 @@
                         </div>
                     </div>
 
+                    {{#if isInRole 'admin,superadmin'}}
                     <div class="form-group">
                         <label for="accountStatus" class="col-lg-2 control-label">Account Status</label>
                          <div class="col-lg-6">
@@ -37,9 +38,38 @@
                             </div>
                         </div>
                     </div>
-                    
+                    {{/if}}
 
-                    <!--Accounts.changePassword(oldPassword, newPassword, [callback])-->
+
+                    <div class="form-group" id="change-password-toggle">
+                         <div class="col-lg-6 col-lg-offset-2">
+                            <button type="button" class="btn btn-primary">Change Password</button>
+                        </div>
+                    </div>
+                    
+                     
+                    <div class="change-password hidden" id="change-password-div">
+                         <div class="form-group">
+                            <label for="currPassword" class="col-lg-2 control-label">Current Password</label>
+                             <div class="col-lg-6">
+                                <input type="password" class="form-control" name="currpassword" id="currpassword" value=""  />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="newPassword" class="col-lg-2 control-label">New Password</label>
+                             <div class="col-lg-6">
+                                <input type="password" class="form-control" name="newpassword" id="newpassword" value=""  />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-6 col-lg-offset-2">
+                              <button type="button" class="btn btn-primary" id="change-password">Change Password</button>
+                              <button type="button" class="btn btn-default" id="cancel-change-password">Cancel</button>
+                            </div>
+                        </div>
+                        <!--Accounts.changePassword(oldPassword, newPassword, [callback])-->
+                    </div>
+
 
                     {{#if isInRole 'admin,superadmin'}}
                     <div class="form-group">

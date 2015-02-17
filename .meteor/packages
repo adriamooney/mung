@@ -22,4 +22,6 @@ npm-container
 alanning:roles
 email
 adriamooney:bootswatch-cyborg
-clinical:nvd3
+aslagle:reactive-table
+
+nvd3:nvd3
