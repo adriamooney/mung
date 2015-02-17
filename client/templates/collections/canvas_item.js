@@ -2,7 +2,7 @@ Template.canvasItem.events({
 	'click .options-toggle, click .properties-toggle': function(e) {
 		var optionsDiv = e.currentTarget.nextElementSibling;
 		optionsDiv.style.display = (optionsDiv.style.display != 'block' ? 'block' : 'none');
-		console.log(this);
+		//console.log(this);
 	},
 	'click .remove-canvas-item': function(e) {
 		var thisItem = document.getElementById('canvas-item-'+this._id);
@@ -14,13 +14,15 @@ Template.canvasItem.events({
 	},
 	'click .close-properties': function(event) {
 		var propsDiv = event.currentTarget.parentElement;
-		console.log(propsDiv);
+		//console.log(propsDiv);
 		propsDiv.style.display = 'none';
 		Session.set('propertiesToggleState', propsDiv.style.display);
 	},
 	'change .property-checkbox': function(e) {
 		console.log(e.currentTarget.value);
-		var checked = e.currentTarget.checked;
+		var checked = e.currentTarget.checked;		
+
+
 		if(checked == true) {
 			console.log('checked');
 		}
@@ -28,7 +30,31 @@ Template.canvasItem.events({
 			console.log('unchecked');
 		}
 
-	}	
+	},
+	'click .summary': function(e) {
+
+		// after a little data prep, 
+		// this function calls a utility to create summary graphs
+		var canvas_id = this._id;
+		var status_array = [];
+		var i = 0;
+
+		$('#canvas-item-'+canvas_id+ ' .property-checkbox').each(function() {
+			var checked = this.checked;
+			if (checked == true) {
+				status_array[i] = 1 // 1 = checked
+			} else {
+				status_array[i] = 0; // 0 = unchecked
+			}
+			i++;
+		});
+		// console.log(status_array);
+		var summary_graph_list = {
+			collection_id: canvas_id,
+			'status_array': status_array
+		};
+		MungSummaryGraph.init(summary_graph_list);
+	}
 
 });
 
@@ -65,5 +91,5 @@ Template.canvasItem.helpers({
 			}
 		}
 		return property_array;
-	}
+	},
 });
