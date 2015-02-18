@@ -45,7 +45,11 @@ Template.canvas.rendered = function() {
 
 		    var data = Collections.findOne({_id: selected_collection[key]});
 
-		    Blaze.renderWithData(Template.canvasItem, data, canvas);
+		    if(data) {
+		    	Blaze.renderWithData(Template.canvasItem, data, canvas);
+		    }
+
+		    
 		  }
 		}
 	}

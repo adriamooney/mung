@@ -2,7 +2,7 @@
 	<ul class="nav nav-pills nav-stacked collections-list">
 		{{#each collections}}
 			<li><i class="fa fa-cog settings-toggle"></i>  
-				<ul class="settings list-unstyled"><i class="fa fa-times close"></i> 
+				<ul class="settings list-unstyled" id="collection-list-item-settings-{{_id}}"><i class="fa fa-times close"></i> 
 					<li><form><input class="edit-name" type="text" id="edit-collection-{{_id}}" value="{{title}}" /><input type="submit" value="Save" class="btn btn-xs btn-primary" /></form></li>
 					<li><span class="delete"><i class="fa fa-trash-o"></i> Remove Collection</span></li>
 				</ul>

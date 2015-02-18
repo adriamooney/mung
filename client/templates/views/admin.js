@@ -1,6 +1,6 @@
 Template.plans.helpers({
 	plan: function() {
-		return AccountPlans.find();
+		return AccountPlans.find().fetch();
 	}
 	
 });

@@ -1,10 +1,14 @@
 Meteor.publish('collections', function(){
 
-	//TODO:  needs to by limited by organiztion, OR limited by current user.
-	//so we need to add these properties to the collection
+    //TODO:  needs to by limited by organiztion, OR limited by current user.
     var currentUserId = this.userId; //currently logged in user. syntax is different when used on the client (Meteor.userId())
-    //return Collections.find({organization: organizationId})
-    return Collections.find();
+       
+    var user = Meteor.users.findOne({_id: this.userId});
+    console.log(currentUserId);
+    var orgId = user.profile.orgId;
+
+    return Collections.find({orgId: orgId});
+
 });
 
 Meteor.publish('organizations', function() {

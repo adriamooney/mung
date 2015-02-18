@@ -3,6 +3,13 @@
         <h1>{{name}} Management <small><sup class="label label-info">{{plan}}</sup></small></h1>
     </div>
 
+
+        <div class="col-lg-6">
+            <div class="well">
+                {{>stripeForm}}
+            </div>
+        </div>
+
     {{>orgUsers}}
 
     <!--
@@ -31,7 +38,7 @@
         </tbody>
 	</table>-->
 
-	<form class="form-horizontal">
+	<form class="form-horizontal" id="new-org-user">
             <fieldset>
             <legend>Add New User</legend>
                 <div class="form-group">

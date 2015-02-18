@@ -62,23 +62,21 @@ Template.collectionsList.events({
 
 		var currVal = $(el).parent().find('input');
 		var newVal = currVal[0].value;
-		var canvasName = document.getElementById('canvas-item-title-'+this._id);
+		var canvasName = document.getElementById('canvas-item-title-'+id);
 
 		//update name
 		Meteor.call('updateCollectionName', id, newVal, function() {
 
 			//this doesn't really update the canvas item template {{title}}, it's just in the dom
 			canvasName.innerHTML = newVal;
+			document.getElementById('collection-list-item-settings-'+id).style.display = 'none';
 		});
 
 
 	},
 	'click .close': function(e) {
 		e.currentTarget.parentElement.style.display = 'none';
-	},
-	'blur .edit-name': function(e) {
-		e.currentTarget.style.border = 'none';
-	} 
+	}
 });
 
 

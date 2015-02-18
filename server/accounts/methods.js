@@ -19,5 +19,8 @@ Meteor.methods({
 	},
 	deleteUser: function(id) {
 		Meteor.users.remove(id);
+	},
+	updatePlan: function(id, accountCode) {
+		Meteor.users.update( {_id: id}, {$set: {'profile.accountCode': accountCode}});
 	}
 });

@@ -1,0 +1,22 @@
+<template name="stripeForm">
+
+    <form id="stripe-form">
+    	<fieldset>
+            <legend>Subscribe</legend>
+	        <div class="row">
+	          <div class="col-xs-12">
+
+	            <div class="form-group">
+	                <input type="text" class="form-control" placeholder="Name on Card" name="nameOnCard" required="">
+	            </div>
+	            
+	          </div>
+	        </div>
+
+	      {{> stripeEasyInputs}}
+	      <button type="submit" class="btn btn-primary">Submit</button>
+  		</fieldset>
+    </form>
+
+
+</template>

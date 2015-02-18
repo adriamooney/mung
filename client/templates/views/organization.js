@@ -70,7 +70,7 @@ Template.orgUsers.helpers({
 Template.organization.events({
 
 	//Add New User to organization
-	'submit form': function(e) {
+	'submit #new-org-user': function(e) {
 		e.preventDefault();
 		
 		var email = e.target.email.value;
