@@ -22,5 +22,12 @@ Meteor.methods({
 	},
 	changeUserPlan: function(id, accountCode) {
 		Meteor.users.update( {_id: id}, {$set: {'profile.accountCode': accountCode}});
+	},
+	changeOrgUsersPlan: function(orgId, accountCode) {
+		//update all users in an org to a new accountCode:
+		Meteor.users.update( {'profile.orgId':orgId}, {$set: {'profile.accountCode': accountCode}}, {multi: true} );
+
 	}
 });
+
+//{_id: {$in: [id1, id2, id3]}}

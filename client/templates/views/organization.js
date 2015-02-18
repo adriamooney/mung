@@ -32,6 +32,20 @@ Template.orgUsers.helpers({
     }
 });
 
+Template.organization.helpers({
+	showStripeForm: function() {
+		//if current user is in this org, show stripe form
+		var orgId = this._id;
+		var userId = Meteor.user().profile.orgId;
+		if (orgId == userId) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+});
 
 Template.organization.events({
 

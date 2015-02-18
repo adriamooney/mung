@@ -1,17 +1,26 @@
 <template name="stripeForm">
 
-	{{# if updatePlan}}
-		<div class="form-group">
-                <label for="accountPlan" class="col-lg-2 control-label">Account Plan</label>
-                <div class="col-lg-6">
-                    <select class="form-control" name="accountCode">
-                        {{#each mung_getPlans}}
-                            <option value="{{code}}">{{name}}</option>
-                        {{/each}}
-                    </select>
-                </div>
+{{# if updatePlan}}
+	<form id="update-stripe-form">
+    	<fieldset>
+            <legend>Change Plan</legend>
+            <div class="row">
+			    <div class="col-xs-12">
+				   <div class="form-group">
+	
+			                <select class="form-control" name="accountCode">
+                                    <option value="select_plan">Select Plan</option>
+			                    {{#each mung_getPlans}}
+			                        <option value="{{code}}">{{name}}</option>
+			                    {{/each}}
+			                </select>
+			   
+			        </div>
+			    </div>
             </div>
-
+            <button type="submit" class="btn btn-primary">Submit</button>
+		</fieldset>
+    </form>
     
     {{else}}
 
@@ -19,19 +28,16 @@
     	<fieldset>
             <legend>Subscribe</legend>
 
-            <div class="form-group">
-                <label for="accountPlan" class="col-lg-2 control-label">Account Plan</label>
-                <div class="col-lg-6">
-                    <select class="form-control" name="accountCode">
-                        {{#each mung_getPlans}}
-                            <option value="{{code}}">{{name}}</option>
-                        {{/each}}
-                    </select>
-                </div>
-            </div>
-
 	        <div class="row">
 	          <div class="col-xs-12">
+	          	  <div class="form-group">
+
+                        <select class="form-control" name="accountCode">
+                            {{#each mung_getPlans}}
+                                <option value="{{code}}">{{name}}</option>
+                            {{/each}}
+                        </select>
+	               </div>
 
 	            <div class="form-group">
 	                <input type="text" class="form-control" placeholder="Name on Card" name="nameOnCard" required="">
@@ -45,8 +51,8 @@
   		</fieldset>
     </form>
 
-
-    {{/if}}
+{{/if}}
+    
 
 
 </template>

@@ -3,40 +3,19 @@
         <h1>{{name}} Management <small><sup class="label label-info">{{mung_getPlanName}}</sup></small></h1>
     </div>
 
-
-        <div class="col-lg-6">
-            <div class="well">
-                {{>stripeForm}}
+       <!--only show stripeForm if role is admin, and if currentUser is in this organization-->
+        {{# if showStripeForm}}
+        {{#if isInRole 'admin,superadmin'}}
+            <div class="col-lg-6">
+                <div class="well">
+                    {{>stripeForm}}
+                </div>
             </div>
-        </div>
+        {{/if}}
+        {{/if}}
 
-    {{>orgUsers}}
+        {{>orgUsers}}
 
-    <!--
-	<table class="table table-striped table-hover">
-        <thead>
-    		<tr>
-    			<th>Full Name</th>
-    			<th>Email</th>
-    			<th>User Type</th>
-    			<th>Account Status</th>
-    			<th>Organization</th>
-    			<th>Account Plan</th>
-    		</tr>
-        </thead>
-        <tbody>
-    	{{#each user}}
-    		<tr>
-    			<td><a href="/account/{{_id}}">{{profile.name}}</a></td>
-    			<td><a href="/account/{{_id}}">{{emails.[0].address}}</a></td>
-    			<td>{{roles.[0]}}</td>
-    			<td>{{profile.accountStatus}}</td>
-    			<td>{{profile.orgName}}</td>
-    			<td>{{userPlan}}</td>
-    		</tr>
-    	{{/each}}
-        </tbody>
-	</table>-->
 
 	<form class="form-horizontal" id="new-org-user">
             <fieldset>

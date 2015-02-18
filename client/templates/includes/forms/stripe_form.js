@@ -9,6 +9,7 @@ Template.stripeForm.events({
 
 		if(err){
 			Session.set('stripeEasyError', err); // show error to user
+			AppMessages.throw(err.reason, 'danger');
 		}
 		else {
 			// if no error, will return the newly created customer object from Stripe
@@ -16,11 +17,29 @@ Template.stripeForm.events({
 			var userId = Meteor.userId();
 			var orgId = Meteor.user().profile.orgId;
 			Meteor.call('changeOrgPlan', orgId, plan_id);
-			Meteor.call('changeUserPlan', userId, plan_id);
+			Meteor.call('changeOrgUsersPlan', orgId, plan_id);
 		}
 			
 		}); 
-	} 
+	},
+	'submit #update-stripe-form': function(e) {
+		e.preventDefault();
+		var plan_id = e.target.accountCode.value;
+		StripeEasy.update(plan_id, function(err, result){
+  			// result will be the updated subscription object from Stripe
+  			if(err) {
+  				AppMessages.throw(err.reason, 'danger');
+  			}
+  			else {
+  				console.log(result);
+  				var userId = Meteor.userId();
+				var orgId = Meteor.user().profile.orgId;
+  				Meteor.call('changeOrgPlan', orgId, plan_id);
+				Meteor.call('changeOrgUsersPlan', orgId, plan_id);
+
+  			}
+		});
+	}
 });
 
 
@@ -28,8 +47,9 @@ Template.stripeForm.events({
 Template.stripeForm.helpers({
 	updatePlan: function() {
 		var orgId = Meteor.user().profile.orgId;
-		var org = Organizations.find({_id: orgId});
+		var org = Organizations.findOne({_id: orgId});
 		if (org.stripePlan == 'active') {
+
 			return true;
 		}
 		else {
