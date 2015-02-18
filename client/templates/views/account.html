@@ -22,7 +22,7 @@
                     <div class="form-group">
                         <label for="accountPlan" class="col-lg-2 control-label">Account Plan</label>
                          <div class="col-lg-6">
-                            <input type="text" class="form-control" name="email" value="{{getPlan}}" disabled="disabled" readonly="readonly" />
+                            <input type="text" class="form-control" name="email" value="{{mung_getPlanName_user}}" disabled="disabled" readonly="readonly" />
                         </div>
                     </div>
 
@@ -41,6 +41,7 @@
                     {{/if}}
 
 
+                    {{#if currentUserAccount}}
                     <div class="form-group" id="change-password-toggle">
                          <div class="col-lg-6 col-lg-offset-2">
                             <button type="button" class="btn btn-primary">Change Password</button>
@@ -69,6 +70,7 @@
                         </div>
                         <!--Accounts.changePassword(oldPassword, newPassword, [callback])-->
                     </div>
+                    {{/if}}
 
 
                     {{#if isInRole 'admin,superadmin'}}
@@ -95,6 +97,20 @@
                         </div>
                     </div>
                     {{/if}}
+
+                    {{#if isInRole 'superadmin'}}
+                     <div class="form-group">
+                        <label for="changeUserOrg" class="col-lg-2 control-label">Organization</label>
+                        <div class="col-lg-6">
+                            <select class="form-control" name="changeUserOrg" id="changeUserOrg">
+                                {{#each getAllOrgs}}
+                                    <option value="{{_id}}" selected="{{userOrg}}">{{name}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                    </div>
+                    {{/if}}
+                    
 
                     <div class="form-group">
                         <div class="col-lg-6 col-lg-offset-2">

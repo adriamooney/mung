@@ -16,9 +16,3 @@ Template.newOrganizationForm.events({
 	}
 
 });
-
-Template.newOrganizationForm.helpers({
-	plan: function() {
-		return AccountPlans.find();
-	}
-});

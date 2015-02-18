@@ -1,37 +1,3 @@
-Template.organization.helpers({
-	plan: function() {
-		var plans = AccountPlans.find().fetch();
-		var accountCode = this.accountCode;
-		var planName;
-		_.each(plans, function(plan) {
-		
-			if (plan.code == accountCode) {
-				planName = plan.name;
-			}
-
-		});
-
-		return planName;
-	}
-
-});
-
-Template.orgPlan.helpers({
-	orgPlan: function() {
-		var plans = AccountPlans.find().fetch();
-		var accountCode = this.profile.accountCode;
-		var planName;
-		_.each(plans, function(plan) {
-		
-			if (plan.code == accountCode) {
-				planName = plan.name;
-			}
-
-		});
-
-		return planName;
-	}
-});
 
 Template.orgUsers.helpers({
 	orgUsers: function() {
@@ -66,11 +32,25 @@ Template.orgUsers.helpers({
     }
 });
 
+Template.organization.helpers({
+	showStripeForm: function() {
+		//if current user is in this org, show stripe form
+		var orgId = this._id;
+		var userId = Meteor.user().profile.orgId;
+		if (orgId == userId) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+});
 
 Template.organization.events({
 
 	//Add New User to organization
-	'submit form': function(e) {
+	'submit #new-org-user': function(e) {
 		e.preventDefault();
 		
 		var email = e.target.email.value;

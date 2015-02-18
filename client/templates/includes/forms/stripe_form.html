@@ -1,0 +1,58 @@
+<template name="stripeForm">
+
+{{# if updatePlan}}
+	<form id="update-stripe-form">
+    	<fieldset>
+            <legend>Change Plan</legend>
+            <div class="row">
+			    <div class="col-xs-12">
+				   <div class="form-group">
+	
+			                <select class="form-control" name="accountCode">
+                                    <option value="select_plan">Select Plan</option>
+			                    {{#each mung_getPlans}}
+			                        <option value="{{code}}">{{name}}</option>
+			                    {{/each}}
+			                </select>
+			   
+			        </div>
+			    </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+		</fieldset>
+    </form>
+    
+    {{else}}
+
+    	<form id="stripe-form">
+    	<fieldset>
+            <legend>Subscribe</legend>
+
+	        <div class="row">
+	          <div class="col-xs-12">
+	          	  <div class="form-group">
+
+                        <select class="form-control" name="accountCode">
+                            {{#each mung_getPlans}}
+                                <option value="{{code}}">{{name}}</option>
+                            {{/each}}
+                        </select>
+	               </div>
+
+	            <div class="form-group">
+	                <input type="text" class="form-control" placeholder="Name on Card" name="nameOnCard" required="">
+	            </div>
+	            
+	          </div>
+	        </div>
+
+	      {{> stripeEasyInputs}}
+	      <button type="submit" class="btn btn-primary">Submit</button>
+  		</fieldset>
+    </form>
+
+{{/if}}
+    
+
+
+</template>
