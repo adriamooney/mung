@@ -1,37 +1,3 @@
-Template.organization.helpers({
-	plan: function() {
-		var plans = AccountPlans.find().fetch();
-		var accountCode = this.accountCode;
-		var planName;
-		_.each(plans, function(plan) {
-		
-			if (plan.code == accountCode) {
-				planName = plan.name;
-			}
-
-		});
-
-		return planName;
-	}
-
-});
-
-Template.orgPlan.helpers({
-	orgPlan: function() {
-		var plans = AccountPlans.find().fetch();
-		var accountCode = this.profile.accountCode;
-		var planName;
-		_.each(plans, function(plan) {
-		
-			if (plan.code == accountCode) {
-				planName = plan.name;
-			}
-
-		});
-
-		return planName;
-	}
-});
 
 Template.orgUsers.helpers({
 	orgUsers: function() {

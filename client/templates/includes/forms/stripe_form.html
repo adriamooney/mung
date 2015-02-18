@@ -1,8 +1,35 @@
 <template name="stripeForm">
 
-    <form id="stripe-form">
+	{{# if updatePlan}}
+		<div class="form-group">
+                <label for="accountPlan" class="col-lg-2 control-label">Account Plan</label>
+                <div class="col-lg-6">
+                    <select class="form-control" name="accountCode">
+                        {{#each mung_getPlans}}
+                            <option value="{{code}}">{{name}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+            </div>
+
+    
+    {{else}}
+
+    	<form id="stripe-form">
     	<fieldset>
             <legend>Subscribe</legend>
+
+            <div class="form-group">
+                <label for="accountPlan" class="col-lg-2 control-label">Account Plan</label>
+                <div class="col-lg-6">
+                    <select class="form-control" name="accountCode">
+                        {{#each mung_getPlans}}
+                            <option value="{{code}}">{{name}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+            </div>
+
 	        <div class="row">
 	          <div class="col-xs-12">
 
@@ -17,6 +44,9 @@
 	      <button type="submit" class="btn btn-primary">Submit</button>
   		</fieldset>
     </form>
+
+
+    {{/if}}
 
 
 </template>

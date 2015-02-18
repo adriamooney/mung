@@ -18,24 +18,6 @@ Meteor.startup(function () {
 
   }
 
-  //TODO: MOVE this to global-helpers.js !!!  or to some other place...it doesn't work here
-  /*
-  var fetchAccountPlans = AccountPlans.find().fetch();
-  Session.set('allAccountPlans', fetchAccountPlans);
-  var allAccountPlans = Session.get('allAccountPlans');
-
-  var getPlanName = function(accountCode) {
-    var planName;
-    _.each(allAccountPlans, function(plan) {
-    
-      if (plan.code == accountCode) {
-        planName = plan.name;
-      }
-
-    });
-    return planName;
-  } */
-
 
 });
 

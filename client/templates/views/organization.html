@@ -1,6 +1,6 @@
 <template name="organization">
 	<div class="page-header">
-        <h1>{{name}} Management <small><sup class="label label-info">{{plan}}</sup></small></h1>
+        <h1>{{name}} Management <small><sup class="label label-info">{{mung_getPlanName}}</sup></small></h1>
     </div>
 
 
@@ -80,5 +80,5 @@
 </template>
 
 <template name="orgPlan">
-    {{orgPlan}}
+    {{mung_getPlanName_user}}
 </template>

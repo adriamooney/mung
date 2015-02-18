@@ -73,6 +73,7 @@ Template.account.events({
 Template.account.rendered = function() {
     //console.log(this.data); // you should see your passage object in the console
     //use the router to get the user's id
+    //SOMETIMES THE USER IS UNDEFINED.  FIGURE OUT WHAT CAUSES THIS
     var r = Router.current().url;
 	var a = r.split('/');
 	var id = a.pop();
@@ -110,23 +111,6 @@ Template.account.helpers({
     	if (this.roles[0] == 'superadmin') {
     		return true;
     	}
-    },
-    getPlan: function() {
-    	var user = Session.get('accountPageUser');
-    	var plans = AccountPlans.find().fetch();
-
-		var accountCode = user.profile.accountCode;
-
-		var planName;
-		_.each(plans, function(plan) {
-		
-			if (plan.code == accountCode) {
-				planName = plan.name;
-			}
-
-		});
-
-		return planName;
     },
     activeStatus: function() {
     	var status = this.profile.accountStatus;
