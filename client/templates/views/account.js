@@ -8,13 +8,19 @@ Template.account.events({
 
 		var id = this._id;
 
+		var changeUser = document.getElementById("changeUserOrg");
+
+		var orgName = $("#changeUserOrg :selected").text();
+
+		var orgId = e.target.changeUserOrg.value;
+
 		//client side validation.  we can also use this function on the server
 		// see lib/collections/posts.js
 		//var errors = validatePost(post);
 		//if(errors.title || errors.url)
 			//return Session.set('postSubmitErrors', errors);
 
-		Meteor.call('accountInfoInsert', displayName, role, id, function(error, result) {
+		Meteor.call('accountInfoInsert', displayName, role, id, orgName, orgId, function(error, result) {
 
 			console.log('success');
 			AppMessages.throw('your account was updated', 'success');
@@ -119,6 +125,16 @@ Template.account.helpers({
     	}
     	else {
     		return false;
+    	}
+    },
+    getAllOrgs: function() {
+    	return Organizations.find();
+    },
+    userOrg: function() {
+    	var user = Session.get('accountPageUser');
+
+    	if(this.name == user.profile.orgName) {
+    		return true;
     	}
     }
 

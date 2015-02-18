@@ -1,13 +1,19 @@
 Meteor.publish('collections', function(){
 
-    //TODO:  needs to by limited by organiztion, OR limited by current user.
+   
     var currentUserId = this.userId; //currently logged in user. syntax is different when used on the client (Meteor.userId())
        
     var user = Meteor.users.findOne({_id: this.userId});
     console.log(currentUserId);
     var orgId = user.profile.orgId;
-
-    return Collections.find({orgId: orgId});
+    //if user is part of this organization, which they are set by default upon signing up, then only show their own collections
+    if(user.profile.orgName == 'Individual Users') {
+      return Collections.find({uploadedBy: currentUserId});
+    }//otherwise limit collections to those in the organization
+    else {
+      return Collections.find({orgId: orgId});
+    }
+    
 
 });
 

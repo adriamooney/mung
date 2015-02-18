@@ -1,8 +1,8 @@
 Meteor.methods({
 
-	accountInfoInsert:function(displayName, role, id) {
+	accountInfoInsert:function(displayName, role, id, orgName, orgId) {
 		//var userId = Meteor.user()._id;
-		Meteor.users.update({_id:id}, {$set:{"profile.name":displayName}});
+		Meteor.users.update({_id:id}, {$set:{"profile.name":displayName, 'profile.orgName': orgName, 'profile.orgId': orgId}});
 
 		Roles.setUserRoles(id, role);
 
