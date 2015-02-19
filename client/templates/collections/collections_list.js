@@ -5,21 +5,13 @@ Template.collectionsList.helpers({
 
 });
 
-/*Template.collectionsList.created = function() {
-	var emnpty_session_obj = {};
-	Session.set('selectedColletion', emnpty_session_obj);
-} */
-
 Template.collectionsList.events({
 	'click .collection-list-item': function(e) {
 
-		//This gets the id of the selectedCollection and adds it to an object to be saved in the session variable 'selectedItems';
+		//This gets the id of the selectedCollection and adds it to an object to be saved in the session variable 'selectedCollection';
 
 		var collectionId = this._id;
 		//console.log(collectionId);
-		var data = Collections.findOne({_id: this._id});
-		//console.log(data);
-		var canvas = document.getElementById('canvas');
 
 		var selectedItems = Session.get('selectedCollection', selectedItems);
 		if(!selectedItems) {
@@ -29,12 +21,6 @@ Template.collectionsList.events({
 		selectedItems[collectionId] = collectionId;
         Session.set('selectedCollection', selectedItems);
         //console.log(Session.get('selectedCollection'));
-
-        //render the canvasItem template into the canvas
-        var canvasItem = document.getElementById('canvas-item-'+this._id);
-        if(!canvasItem) {
-        	Blaze.renderWithData(Template.canvasItem, data, canvas);
-        }
 		
 	},
 	'click .settings-toggle': function(e) {

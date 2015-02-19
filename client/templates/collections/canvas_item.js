@@ -58,29 +58,63 @@ Template.canvasItem.events({
 
 });
 
-Template.canvas.rendered = function() {
+/*Template.canvas.rendered = function() {
 	//when canvas is rendered, get all the selected collections ids from the session variable object, 
 	//then render a canvasItem template for each id
 
 	var selected_collection = Session.get('selectedCollection');
+	console.log(selected_collection);
 
 	var canvas = document.getElementById('canvas');
 	if(selected_collection) {
 		for (var key in selected_collection) {
 		  if (selected_collection.hasOwnProperty(key)) {
 
-		    var data = Collections.findOne({_id: selected_collection[key]});
+		  	//this is not happening fast enough, so it is undefined???
+
+			var data Collections.findOne({_id: selected_collection[key]});
+
+			return !data.ready();
+
+			//this is broken
+		    Meteor.setInterval(function() {
+		    	var data = Collections.findOne({_id: selected_collection[key]});
+		    	console.log(data);
+		    }, 2000);
 
 		    if(data) {
+		    	Meteor.clearInterval();
 		    	Blaze.renderWithData(Template.canvasItem, data, canvas);
-		    }
+		    } 
 
 		    
 		  }
 		}
 	}
 
-}
+} */
+
+Template.canvas.helpers({
+	canvasItems: function() {
+		var selected_collection = Session.get('selectedCollection');
+		console.log(selected_collection);
+
+		var arr = [];
+
+		if(selected_collection) {
+			for (var key in selected_collection) {
+				if (selected_collection.hasOwnProperty(key)) {
+
+					var data = Collections.findOne({_id: selected_collection[key]});
+					arr.push(data);
+
+			  	}   
+			}
+
+			return arr;
+		}
+	}
+});
 
 
 Template.canvasItem.helpers({

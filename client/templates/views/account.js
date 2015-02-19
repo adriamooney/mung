@@ -1,5 +1,5 @@
 Template.account.events({
-	'submit form': function(e) {
+	'submit #account-form': function(e) {
 		e.preventDefault();
 
 		var displayName =  e.target.displayName.value;
@@ -79,14 +79,14 @@ Template.account.events({
 Template.account.rendered = function() {
     //console.log(this.data); // you should see your passage object in the console
     //use the router to get the user's id
-    //SOMETIMES THE USER IS UNDEFINED.  FIGURE OUT WHAT CAUSES THIS
+    //this is also set in the account router
     var r = Router.current().url;
 	var a = r.split('/');
 	var id = a.pop();
 	var user = Meteor.users.findOne({_id:id});
 
     Session.set('accountPageUser', user);
-};
+}; 
 
 Template.account.helpers({
 	currentUserAccount: function() {
@@ -136,6 +136,18 @@ Template.account.helpers({
     	if(this.name == user.profile.orgName) {
     		return true;
     	}
+    },
+    showStripeForm: function() {
+    	//if current user is in this org show stripe form, and current user must be on their own account page only
+		var orgName = Meteor.user().profile.orgName;
+		var user = Session.get('accountPageUser');
+
+		if ((orgName  == 'Individual Users') && (user._id == Meteor.userId()) )  {
+			return true;
+		}
+		else {
+			return false;
+		}
     }
 
 });

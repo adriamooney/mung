@@ -1,5 +1,7 @@
 Accounts.onCreateUser(function(options, user) {
   // We still want the default hook's 'profile' behavior.
+  console.log(options.profile);
+
   if (options.profile)
     user.profile = options.profile;
    
@@ -8,10 +10,17 @@ Accounts.onCreateUser(function(options, user) {
     var role = ['user'];
     user.roles = role;
     user.profile.accountStatus = 'active';
-    user.profile.orgName = org.name;
-    user.profile.orgId = org._id;
-    user.profile.accountCode = 1;
+    
+
+    if(!options.profile.orgName) {
+
+      user.profile.orgName = org.name;
+      user.profile.orgId = org._id;
+      user.profile.accountCode = 1;
+    }
 
   return user;
 });
+
+
 
