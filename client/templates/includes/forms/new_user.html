@@ -1,0 +1,36 @@
+<template name="newUser">
+    <form class="form-horizontal" id="new-org-user">
+            <fieldset>
+            <legend>Add New User</legend>
+                <div class="form-group">
+                   
+                    <div class="form-group">
+                        <label for="email" class="col-lg-2 control-label">Email</label>
+                        <div class="col-lg-6">
+                            <input type="text" class="form-control" name="email" placeholder="Email" />
+                        </div>
+                    </div>
+
+                   
+                    <div class="form-group">
+                        <label for="displayName" class="col-lg-2 control-label">Full Name</label>
+                         <div class="col-lg-6">
+                            <input type="text" class="form-control" name="displayName" placeholder="Full Name" value="" />
+                        </div>
+                    </div>
+
+                    <input type="hidden" name="orgId" value="{{_id}}" />
+                    <input type="hidden" name="orgName" value="{{name}}" />
+                    <input type="hidden" name="accountCode" value="{{accountCode}}" />
+
+
+                    <div class="form-group">
+                        <div class="col-lg-6 col-lg-offset-2">
+                          <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </div>
+
+                </div>
+            </fieldset>
+    </form>
+</template>

@@ -1,5 +1,5 @@
-Template.stripeForm.events({
-	'submit #stripe-form': function (e) {
+Template.stripeFormIndividualUser.events({
+	'submit #stripe-form-individual-user': function (e) {
 		e.preventDefault();
 		// make sure there is a Meteor.user() or wrap the following inside the Meteor.createUser callback function
 		var easy = StripeEasy.submitHelper(e);
@@ -13,16 +13,17 @@ Template.stripeForm.events({
 		}
 		else {
 			// if no error, will return the newly created customer object from Stripe
+			//$('#stripe-form').html('You are now subscribed to the ' +result.subscriptions.data[0].plan.name+ ' account plan.');
+			console.log(result);
 			AppMessages.throw('You are now subscribed to the ' +result.subscriptions.data[0].plan.name+ ' account plan.', 'success');
 			var userId = Meteor.userId();
-			var orgId = Meteor.user().profile.orgId;
-			Meteor.call('changeOrgPlan', orgId, plan_id);
-			Meteor.call('changeOrgUsersPlan', orgId, plan_id);
-		}
-			
-		}); 
+
+			Meteor.call('changeUserPlan', userId, plan_id);
+			}
+		});
+
 	},
-	'submit #update-stripe-form': function(e) {
+	'submit #update-stripe-form-individual-user': function(e) {
 		e.preventDefault();
 		var plan_id = e.target.accountCode.value;
 		StripeEasy.update(plan_id, function(err, result){
@@ -34,9 +35,7 @@ Template.stripeForm.events({
   				console.log(result);
   				AppMessages.throw('You are now subscribed to the ' +result.plan.name+ ' account plan.', 'success');
   				var userId = Meteor.userId();
-				var orgId = Meteor.user().profile.orgId;
-  				Meteor.call('changeOrgPlan', orgId, plan_id);
-				Meteor.call('changeOrgUsersPlan', orgId, plan_id);
+				Meteor.call('changeUserPlan', userId, plan_id);
 
   			}
 		});
@@ -45,12 +44,11 @@ Template.stripeForm.events({
 
 
 
-Template.stripeForm.helpers({
+Template.stripeFormIndividualUser.helpers({
 	updatePlan: function() {
-		var orgId = Meteor.user().profile.orgId;
-		var org = Organizations.findOne({_id: orgId});
-		if (org.stripePlan == 'active') {
-
+		var stripePlan = Meteor.user().profile.stripePlan;
+		console.log(stripePlan);
+		if (stripePlan == 'active') {
 			return true;
 		}
 		else {

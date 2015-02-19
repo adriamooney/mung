@@ -21,7 +21,7 @@ Meteor.methods({
 		Meteor.users.remove(id);
 	},
 	changeUserPlan: function(id, accountCode) {
-		Meteor.users.update( {_id: id}, {$set: {'profile.accountCode': accountCode}});
+		Meteor.users.update( {_id: id}, {$set: {'profile.accountCode': accountCode, 'profile.stripePlan': 'active'}});
 	},
 	changeOrgUsersPlan: function(orgId, accountCode) {
 		//update all users in an org to a new accountCode:

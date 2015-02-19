@@ -1,6 +1,17 @@
 <template name="account">
+
+    {{# if showStripeForm}}
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="well">
+                {{>stripeFormIndividualUser}}
+            </div>
+        </div>
+    </div>
+    {{/if}}
+
     <div class="well">
-    	<form class="form-horizontal">
+    	<form class="form-horizontal" id="account-form">
             <fieldset>
             <legend>Account Info</legend>
                 <div class="form-group">

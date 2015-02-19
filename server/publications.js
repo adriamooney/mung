@@ -21,18 +21,23 @@ Meteor.publish('organizations', function() {
 	return Organizations.find();
 });
 
-//this doesn't work, I don't know why
-Meteor.publish('organizationsUsers', function() {
-    //return Meteor.users.find({'profile.orgId': user});
+
+Meteor.publish('organizationsUsers', function(orgId) {
+    return Meteor.users.find({'profile.orgId': orgId});
+
 }); 
 
 Meteor.publish('users', function() {
 	return Meteor.users.find({}, {fields: {emails: 1, profile: 1, username:1, roles: 1}});
 });
 
+Meteor.publish('user', function(id) {
+    return Meteor.users.findOne({_id: id}, {fields: {emails: 1, profile: 1, username:1, roles: 1}});
+});
+
 // in server/publish.js
 Meteor.publish(null, function (){ 
-  return Meteor.roles.find({});
+    return Meteor.roles.find({});
 });
 
 Meteor.publish('accountplans', function() {
