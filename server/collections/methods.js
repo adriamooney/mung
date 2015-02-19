@@ -9,5 +9,8 @@ Meteor.methods({
 	},
 	updateCollectionName: function(id, newVal) {
 		Collections.update( {_id: id}, {$set: {title: newVal}});
-	}
+	},
+	initialize_graphs: function(summary_graph_list){
+		MungSummaryGraph.init(summary_graph_list);
+	},
 });

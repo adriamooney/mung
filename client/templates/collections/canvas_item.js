@@ -53,7 +53,7 @@ Template.canvasItem.events({
 			collection_id: canvas_id,
 			'status_array': status_array
 		};
-		MungSummaryGraph.init(summary_graph_list);
+		Meteor.call("initialize_graphs", summary_graph_list);
 	}
 
 });
