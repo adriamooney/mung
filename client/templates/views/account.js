@@ -76,7 +76,8 @@ Template.account.events({
 
 });
 
-Template.account.rendered = function() {
+//THIS IS NOW SET IN THE ROUTER 
+/*Template.account.rendered = function() {
     //console.log(this.data); // you should see your passage object in the console
     //use the router to get the user's id
     //this is also set in the account router
@@ -86,7 +87,7 @@ Template.account.rendered = function() {
 	var user = Meteor.users.findOne({_id:id});
 
     Session.set('accountPageUser', user);
-}; 
+}; */
 
 Template.account.helpers({
 	currentUserAccount: function() {
