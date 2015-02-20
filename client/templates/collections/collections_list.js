@@ -1,6 +1,6 @@
 Template.collectionsList.helpers({
 	'collections': function() {
-		return Collections.find();
+		return DataSetSummary.find();
 	}
 
 });
@@ -11,7 +11,7 @@ Template.collectionsList.events({
 		//This gets the id of the selectedCollection and adds it to an object to be saved in the session variable 'selectedCollection';
 
 		var collectionId = this._id;
-		//console.log(collectionId);
+		console.log(collectionId);
 
 		var selectedItems = Session.get('selectedCollection', selectedItems);
 		if(!selectedItems) {
@@ -29,7 +29,7 @@ Template.collectionsList.events({
 		optionsDiv.style.display = (optionsDiv.style.display != 'block' ? 'block' : 'none');
 	},
 	'click .delete': function() {
-		var collection = Collections.findOne({_id: this._id});
+		var collection = DataSetsSummary.findOne({_id: this._id});
 		Meteor.call('removeCollection', collection);
 		console.log('collection removed');
 	},

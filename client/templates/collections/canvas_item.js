@@ -105,7 +105,7 @@ Template.canvas.helpers({
 			for (var key in selected_collection) {
 				if (selected_collection.hasOwnProperty(key)) {
 
-					var data = Collections.findOne({_id: selected_collection[key]});
+					var data = DataSetSummary.findOne({_id: selected_collection[key]});
 					arr.push(data);
 
 			  	}   
@@ -119,6 +119,10 @@ Template.canvas.helpers({
 
 Template.canvasItem.helpers({
 	properties: function() {
+		var property_array = this.properties;
+		console.log(this);
+		/* 
+		// OLD STUFF PRE-REFACTOR
 		var props_obj = this.file_data.properties;
 		var property_array = [];
 		if(props_obj){
@@ -127,7 +131,7 @@ Template.canvasItem.helpers({
 					property_array.push(props_obj[key]);
 				}
 			}
-		}
+		}*/
 		return property_array;
 	},
 });

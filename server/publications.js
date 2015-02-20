@@ -1,4 +1,4 @@
-Meteor.publish('collections', function(){
+Meteor.publish('DataSetSummary', function(){
 
    
     var currentUserId = this.userId; //currently logged in user. syntax is different when used on the client (Meteor.userId())
@@ -8,10 +8,10 @@ Meteor.publish('collections', function(){
     var orgId = user.profile.orgId;
     //if user is part of this organization, which they are set by default upon signing up, then only show their own collections
     if(user.profile.orgName == 'Individual Users') {
-      return Collections.find({uploadedBy: currentUserId});
+      return DataSetSummary.find({uploadedBy: currentUserId});
     }//otherwise limit collections to those in the organization
     else {
-      return Collections.find({orgId: orgId});
+      return DataSetSummary.find({orgId: orgId});
     }
     
 
