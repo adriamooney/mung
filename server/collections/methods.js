@@ -13,4 +13,7 @@ Meteor.methods({
 	initialize_graphs: function(summary_graph_list){
 		MungSummaryGraph.init(summary_graph_list);
 	},
+	get_summary_stats: function(collectionId) {
+		MungSummaryStats.init(collectionId);
+	}
 });

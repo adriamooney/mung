@@ -11,7 +11,7 @@ Template.collectionsList.events({
 		//This gets the id of the selectedCollection and adds it to an object to be saved in the session variable 'selectedCollection';
 
 		var collectionId = this._id;
-		console.log(collectionId);
+		//console.log(collectionId);
 
 		var selectedItems = Session.get('selectedCollection', selectedItems);
 		if(!selectedItems) {
@@ -21,6 +21,12 @@ Template.collectionsList.events({
 		selectedItems[collectionId] = collectionId;
         Session.set('selectedCollection', selectedItems);
         //console.log(Session.get('selectedCollection'));
+
+        // we're going ot make sure the summary stats are in place 
+        // we do this now because the user is implying he/she will need that information soon
+        // if the stats haven't yet been calculated
+        // then we calculate them 
+        Meteor.call("get_summary_stats", collectionId);
 		
 	},
 	'click .settings-toggle': function(e) {

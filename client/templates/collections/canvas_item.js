@@ -53,7 +53,8 @@ Template.canvasItem.events({
 			collection_id: canvas_id,
 			'status_array': status_array
 		};
-		Meteor.call("initialize_graphs", summary_graph_list);
+		// this is what gets the summary graphs
+		//Meteor.call("initialize_graphs", summary_graph_list);
 	}
 
 });
@@ -97,7 +98,7 @@ Template.canvasItem.events({
 Template.canvas.helpers({
 	canvasItems: function() {
 		var selected_collection = Session.get('selectedCollection');
-		console.log(selected_collection);
+		//console.log(selected_collection);
 
 		var arr = [];
 
@@ -120,18 +121,6 @@ Template.canvas.helpers({
 Template.canvasItem.helpers({
 	properties: function() {
 		var property_array = this.properties;
-		console.log(this);
-		/* 
-		// OLD STUFF PRE-REFACTOR
-		var props_obj = this.file_data.properties;
-		var property_array = [];
-		if(props_obj){
-			for(var key in props_obj) {
-				if(props_obj.hasOwnProperty(key)) {
-					property_array.push(props_obj[key]);
-				}
-			}
-		}*/
 		return property_array;
 	},
 });
