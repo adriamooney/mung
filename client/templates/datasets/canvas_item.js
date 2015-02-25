@@ -8,9 +8,9 @@ Template.canvasItem.events({
 		var thisItem = document.getElementById('canvas-item-'+this._id);
 		thisItem.parentNode.removeChild(thisItem);
 
-		var obj = Session.get('selectedCollection');
+		var obj = Session.get('selected_dataset');
 		delete obj[this._id];
-		Session.set('selectedCollection', obj);
+		Session.set('selected_dataset', obj);
 	},
 	'click .close-properties': function(event) {
 		var propsDiv = event.currentTarget.parentElement;
@@ -50,7 +50,7 @@ Template.canvasItem.events({
 		});
 		// console.log(status_array);
 		var summary_graph_list = {
-			collection_id: canvas_id,
+			collection_id: canvas_id,  //TODO: does this need to be updated to dataset_id ?
 			'status_array': status_array
 		};
 		Meteor.call("initialize_graphs", summary_graph_list);
@@ -94,27 +94,7 @@ Template.canvasItem.events({
 
 } */
 
-Template.canvas.helpers({
-	canvasItems: function() {
-		var selected_collection = Session.get('selectedCollection');
-		console.log(selected_collection);
 
-		var arr = [];
-
-		if(selected_collection) {
-			for (var key in selected_collection) {
-				if (selected_collection.hasOwnProperty(key)) {
-
-					var data = Collections.findOne({_id: selected_collection[key]});
-					arr.push(data);
-
-			  	}   
-			}
-
-			return arr;
-		}
-	}
-});
 
 
 Template.canvasItem.helpers({

@@ -1,5 +1,5 @@
 // Fixture data
-if (Collections.find().count() === 0) {
+if (DataSets.find().count() === 0) {
 
     var now = new Date().getTime();
 
@@ -15,7 +15,7 @@ if (Collections.find().count() === 0) {
     var tomId = Meteor.users.insert({
         emails: [
         // each email address can only belong to one user.
-            { address: "adriamooney+mung@gmail.com", verified: true },
+            { address: "adriamooney+mung2@gmail.com", verified: true },
         ],
         profile: { 
             name: 'Adria Mooney',
@@ -30,7 +30,7 @@ if (Collections.find().count() === 0) {
     var bobId = Meteor.users.insert({
         emails: [
         // each email address can only belong to one user.
-            { address: "james.dipadua+mung@gmail.com", verified: true },
+            { address: "james.dipadua+mung2@gmail.com", verified: true },
         ],
         profile: { 
             name: 'James DiPadua',
@@ -48,7 +48,7 @@ if (Collections.find().count() === 0) {
 
     var tom = Meteor.users.findOne(tomId);
 
-    Collections.insert({
+    DataSets.insert({
         title: 'My DataSet 1',
         file_name: 'some-name.csv',
         uploadedBy: tom._id,
@@ -67,7 +67,7 @@ if (Collections.find().count() === 0) {
         ]
     });
 
-    Collections.insert({
+    DataSets.insert({
         title: 'Data set with a really long name about stuff',
         file_name: 'some-name.csv',
         uploadedBy: tom._id,

@@ -1,4 +1,4 @@
-Meteor.publish('collections', function(){
+Meteor.publish('datasets', function(){
 
    
     var currentUserId = this.userId; //currently logged in user. syntax is different when used on the client (Meteor.userId())
@@ -6,12 +6,12 @@ Meteor.publish('collections', function(){
     var user = Meteor.users.findOne({_id: this.userId});
     console.log(currentUserId);
     var orgId = user.profile.orgId;
-    //if user is part of this organization, which they are set by default upon signing up, then only show their own collections
+    //if user is part of this organization, which they are set by default upon signing up, then only show their own data sets
     if(user.profile.orgName == 'Individual Users') {
-      return Collections.find({uploadedBy: currentUserId});
-    }//otherwise limit collections to those in the organization
+      return DataSets.find({uploadedBy: currentUserId});
+    }//otherwise limit data sets to those in the organization
     else {
-      return Collections.find({orgId: orgId});
+      return DataSets.find({orgId: orgId});
     }
     
 
@@ -42,6 +42,10 @@ Meteor.publish(null, function (){
 
 Meteor.publish('accountplans', function() {
 	return AccountPlans.find();
+});
+
+Meteor.publish('posts', function() {
+  return Posts.find();  
 });
 
 

@@ -1,26 +1,26 @@
-Template.collectionsList.helpers({
-	'collections': function() {
-		return Collections.find();
+Template.dataSetsList.helpers({
+	'dataSets': function() {
+		return DataSets.find();
 	}
 
 });
 
-Template.collectionsList.events({
-	'click .collection-list-item': function(e) {
+Template.dataSetsList.events({
+	'click .dataset-list-item': function(e) {
 
-		//This gets the id of the selectedCollection and adds it to an object to be saved in the session variable 'selectedCollection';
+		//This gets the id of the selecteddataset and adds it to an object to be saved in the session variable 'selecteddataset';
 
-		var collectionId = this._id;
-		//console.log(collectionId);
+		var datasetId = this._id;
+		//console.log(datasetId);
 
-		var selectedItems = Session.get('selectedCollection', selectedItems);
+		var selectedItems = Session.get('selected_dataset', selectedItems);
 		if(!selectedItems) {
 			var selectedItems = {};
 		}
 
-		selectedItems[collectionId] = collectionId;
-        Session.set('selectedCollection', selectedItems);
-        //console.log(Session.get('selectedCollection'));
+		selectedItems[datasetId] = datasetId;
+        Session.set('selected_dataset', selectedItems);
+        //console.log(Session.get('selecteddataset'));
 		
 	},
 	'click .settings-toggle': function(e) {
@@ -29,9 +29,9 @@ Template.collectionsList.events({
 		optionsDiv.style.display = (optionsDiv.style.display != 'block' ? 'block' : 'none');
 	},
 	'click .delete': function() {
-		var collection = Collections.findOne({_id: this._id});
-		Meteor.call('removeCollection', collection);
-		console.log('collection removed');
+		var dataset = DataSets.findOne({_id: this._id});
+		Meteor.call('removeDataset', dataset);
+		console.log('dataset removed');
 	},
 	/*'click .edit': function(e) {
 		var el = e.currentTarget;
@@ -51,11 +51,11 @@ Template.collectionsList.events({
 		var canvasName = document.getElementById('canvas-item-title-'+id);
 
 		//update name
-		Meteor.call('updateCollectionName', id, newVal, function() {
+		Meteor.call('updateDatasetName', id, newVal, function() {
 
 			//this doesn't really update the canvas item template {{title}}, it's just in the dom
 			canvasName.innerHTML = newVal;
-			document.getElementById('collection-list-item-settings-'+id).style.display = 'none';
+			document.getElementById('dataset-list-item-settings-'+id).style.display = 'none';
 		});
 
 

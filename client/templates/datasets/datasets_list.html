@@ -1,0 +1,25 @@
+<template name="dataSetsList">
+	<ul class="nav nav-pills nav-stacked datasets-list">
+		{{#each dataSets}}
+			<li><i class="fa fa-cog settings-toggle glyphicon glyphicon-cog"></i>  
+				<ul class="settings list-unstyled" id="dataset-list-item-settings-{{_id}}"><i class="fa fa-times close"></i> 
+					<li><form><input class="edit-name" type="text" id="edit-dataset-{{_id}}" value="{{title}}" /><input type="submit" value="Save" class="btn btn-xs btn-primary" /></form></li>
+					<li><span class="delete"><i class="fa fa-trash-o"></i> Remove Data Set</span></li>
+				</ul>
+				{{>dataSetItem}}
+			</li>
+		{{/each}}
+		<!--
+		https://github.com/wdavidw/node-csv
+		https://github.com/tomitrescak/meteor-uploads
+		http://stackoverflow.com/questions/19314200/using-node-csv-and-meteor-file-to-import-csv-into-a-collection
+		-->
+		{{> upload_bootstrap fileTypes='.csv' multiple=true }}
+		<!--<li><button class="btn btn-primary btn-sm"><i class="fa fa-plus-circle"></i> Add new Data Set</button></li>-->
+	</ul>
+</template>
+
+
+<template name="dataSetItem">
+	<span class="dataset-list-item" id="dataset-list-{{_id}}">{{title}}</span>
+</template>
