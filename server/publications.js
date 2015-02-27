@@ -23,6 +23,10 @@ Meteor.publish('organizations', function() {
 	return Organizations.find();
 });
 
+Meteor.publish('userOrg', function(orgId) {
+  return Organizations.find({_id: orgId});
+});
+
 
 Meteor.publish('organizationsUsers', function(orgId) {
     return Meteor.users.find({'profile.orgId': orgId});

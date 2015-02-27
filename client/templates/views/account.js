@@ -93,9 +93,10 @@ Template.account.helpers({
 	currentUserAccount: function() {
 		var accountPageUser = Session.get('accountPageUser');
 		var user = Meteor.userId();
-
-		if (accountPageUser._id == user) {
+		if(accountPageUser) {
+			if (accountPageUser._id == user) {
 			return true;
+			}
 		}
 	},
 	getAllRoles: function() {
