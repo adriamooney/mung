@@ -1,6 +1,11 @@
 Template.dataSetsList.helpers({
 	'dataSets': function() {
-		return DataSets.find();
+		return DataSetSummary.find();
+	},
+	dataPresent: function() {
+		//if (DataSetSummary.find().count() >= 1) {
+			return DataSetSummary.find().count();
+		//}
 	}
 
 });
@@ -21,6 +26,11 @@ Template.dataSetsList.events({
 		selectedItems[datasetId] = datasetId;
         Session.set('selected_dataset', selectedItems);
         //console.log(Session.get('selecteddataset'));
+         // we're going ot make sure the summary stats are in place  	 	
+	    // we do this now because the user is implying he/she will need that information soon 	 	
+		// if the stats haven't yet been calculated 	 	
+		// then we calculate them  	 	
+		Meteor.call("get_summary_stats", collectionId); 
 		
 	},
 	'click .settings-toggle': function(e) {
@@ -29,7 +39,7 @@ Template.dataSetsList.events({
 		optionsDiv.style.display = (optionsDiv.style.display != 'block' ? 'block' : 'none');
 	},
 	'click .delete': function() {
-		var dataset = DataSets.findOne({_id: this._id});
+		var dataset = DataSetSummary.findOne({_id: this._id});
 		Meteor.call('removeDataset', dataset);
 		console.log('dataset removed');
 	},

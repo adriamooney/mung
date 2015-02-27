@@ -53,61 +53,15 @@ Template.canvasItem.events({
 			dataset_id: canvas_id,  
 			'status_array': status_array
 		};
-		Meteor.call("initialize_graphs", summary_graph_list);
+		// this is what gets the summary graphs
+		//Meteor.call("initialize_graphs", summary_graph_list);
 	}
 
 });
 
-/*Template.canvas.rendered = function() {
-	//when canvas is rendered, get all the selected collections ids from the session variable object, 
-	//then render a canvasItem template for each id
-
-	var selected_collection = Session.get('selectedCollection');
-	console.log(selected_collection);
-
-	var canvas = document.getElementById('canvas');
-	if(selected_collection) {
-		for (var key in selected_collection) {
-		  if (selected_collection.hasOwnProperty(key)) {
-
-		  	//this is not happening fast enough, so it is undefined???
-
-			var data Collections.findOne({_id: selected_collection[key]});
-
-			return !data.ready();
-
-			//this is broken
-		    Meteor.setInterval(function() {
-		    	var data = Collections.findOne({_id: selected_collection[key]});
-		    	console.log(data);
-		    }, 2000);
-
-		    if(data) {
-		    	Meteor.clearInterval();
-		    	Blaze.renderWithData(Template.canvasItem, data, canvas);
-		    } 
-
-		    
-		  }
-		}
-	}
-
-} */
-
-
-
-
 Template.canvasItem.helpers({
 	properties: function() {
-		var props_obj = this.file_data.properties;
-		var property_array = [];
-		if(props_obj){
-			for(var key in props_obj) {
-				if(props_obj.hasOwnProperty(key)) {
-					property_array.push(props_obj[key]);
-				}
-			}
-		}
+		var property_array = this.properties;
 		return property_array;
 	},
 });

@@ -1,17 +1,21 @@
-Meteor.publish('datasets', function(){
-
+Meteor.publish('datasetsummary', function(){
    
     var currentUserId = this.userId; //currently logged in user. syntax is different when used on the client (Meteor.userId())
        
     var user = Meteor.users.findOne({_id: this.userId});
     console.log(currentUserId);
     var orgId = user.profile.orgId;
+    console.log(orgId);
+
     //if user is part of this organization, which they are set by default upon signing up, then only show their own data sets
     if(user.profile.orgName == 'Individual Users') {
-      return DataSets.find({uploadedBy: currentUserId});
-    }//otherwise limit data sets to those in the organization
+      return DataSetSummary.find({uploadedBy: currentUserId});
+    }//otherwise limit collections to those in the organization
     else {
-      return DataSets.find({orgId: orgId});
+      //why isn't this working???? it was working before
+      //TODO: NEED TO FIX THIS
+      //return DataSetSummary.find({orgId: orgId});
+      return DataSetSummary.find();
     }
     
 

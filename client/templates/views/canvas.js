@@ -9,7 +9,7 @@ Template.canvas.helpers({
 			for (var key in selected_dataset) {
 				if (selected_dataset.hasOwnProperty(key)) {
 
-					var data = DataSets.findOne({_id: selected_dataset[key]});
+					var data = DataSetSummary.findOne({_id: selected_dataset[key]});
 					arr.push(data);
 
 			  	}   

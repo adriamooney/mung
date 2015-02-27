@@ -1,12 +1,15 @@
 // Fixture data
-if (DataSets.find().count() === 0) {
+if (DataSetSummary.find().count() === 0) {
 
     var now = new Date().getTime();
 
-    var orgId = Organizations.insert({
-        name: 'Mung',
-        accountCode: 4
-    });
+    //if (Organizations.find().count() === 0) {
+        var orgId = Organizations.insert({
+            name: 'Mung',
+            accountCode: 4
+        });
+
+    //}
 
     var org = Organizations.findOne(orgId);
 
@@ -15,7 +18,7 @@ if (DataSets.find().count() === 0) {
     var tomId = Meteor.users.insert({
         emails: [
         // each email address can only belong to one user.
-            { address: "adriamooney+mung2@gmail.com", verified: true },
+            { address: "adriamooney+mung4@gmail.com", verified: true },
         ],
         profile: { 
             name: 'Adria Mooney',
@@ -30,7 +33,7 @@ if (DataSets.find().count() === 0) {
     var bobId = Meteor.users.insert({
         emails: [
         // each email address can only belong to one user.
-            { address: "james.dipadua+mung2@gmail.com", verified: true },
+            { address: "james.dipadua+mung4@gmail.com", verified: true },
         ],
         profile: { 
             name: 'James DiPadua',
@@ -48,7 +51,7 @@ if (DataSets.find().count() === 0) {
 
     var tom = Meteor.users.findOne(tomId);
 
-    DataSets.insert({
+    DataSetSummary.insert({
         title: 'My DataSet 1',
         file_name: 'some-name.csv',
         uploadedBy: tom._id,
@@ -67,7 +70,7 @@ if (DataSets.find().count() === 0) {
         ]
     });
 
-    DataSets.insert({
+    DataSetSummary.insert({
         title: 'Data set with a really long name about stuff',
         file_name: 'some-name.csv',
         uploadedBy: tom._id,
