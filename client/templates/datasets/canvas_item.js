@@ -59,9 +59,10 @@ Template.canvasItem.events({
 
 });
 
+
 Template.canvasItem.helpers({
 	properties: function() {
 		var property_array = this.properties;
 		return property_array;
-	},
+	}
 });

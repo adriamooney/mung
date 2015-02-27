@@ -30,7 +30,7 @@ Template.dataSetsList.events({
 	    // we do this now because the user is implying he/she will need that information soon 	 	
 		// if the stats haven't yet been calculated 	 	
 		// then we calculate them  	 	
-		Meteor.call("get_summary_stats", collectionId); 
+		Meteor.call("get_summary_stats", datasetId); 
 		
 	},
 	'click .settings-toggle': function(e) {
