@@ -16,6 +16,11 @@ Meteor.startup(function () {
     console.log(file_info);	
     Meteor.call('convert_CSV', file_info);
 
+    //hide uploader when file is done uploading
+    document.getElementById('uploader-wrap').style.display = 'none';
+    $('#add-dataset').removeClass('cancel');
+    $('#add-dataset').html('<i class="fa fa-plus-circle glyphicon glyphicon-plus"></i> Data Set');
+
   }
 
 

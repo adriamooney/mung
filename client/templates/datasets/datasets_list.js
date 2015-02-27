@@ -54,7 +54,9 @@ Template.dataSetsList.events({
 		Meteor.call('updateDatasetName', id, newVal, function() {
 
 			//this doesn't really update the canvas item template {{title}}, it's just in the dom
-			canvasName.innerHTML = newVal;
+			if(canvasName) {
+				canvasName.innerHTML = newVal;
+			}		
 			document.getElementById('dataset-list-item-settings-'+id).style.display = 'none';
 		});
 
@@ -62,6 +64,16 @@ Template.dataSetsList.events({
 	},
 	'click .close': function(e) {
 		e.currentTarget.parentElement.style.display = 'none';
+	},
+	'click #add-dataset': function(e) {
+		$(e.currentTarget).addClass('cancel');
+		$(e.currentTarget).text('Cancel');
+		document.getElementById('uploader-wrap').style.display = 'block';
+	},
+	'click #add-dataset.cancel': function(e) {
+		document.getElementById('uploader-wrap').style.display = 'none';
+		$(e.currentTarget).removeClass('cancel');
+		$(e.currentTarget).html('<i class="fa fa-plus-circle glyphicon glyphicon-plus"></i> Data Set');
 	}
 });
 

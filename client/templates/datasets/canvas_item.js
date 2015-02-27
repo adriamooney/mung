@@ -50,7 +50,7 @@ Template.canvasItem.events({
 		});
 		// console.log(status_array);
 		var summary_graph_list = {
-			collection_id: canvas_id,  //TODO: does this need to be updated to dataset_id ?
+			dataset_id: canvas_id,  
 			'status_array': status_array
 		};
 		Meteor.call("initialize_graphs", summary_graph_list);

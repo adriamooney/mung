@@ -1,5 +1,7 @@
 <template name="canvasItem">
-	{{# if currentUser }}<div class="canvas-item" id="canvas-item-{{_id}}">
+	{{# if currentUser }}
+	{{# if title}}
+	<div class="canvas-item" id="canvas-item-{{_id}}">
 		<h4 id="canvas-item-title-{{_id}}">{{title}}</h4>
 		<i class="fa fa-cog options-toggle glyphicon glyphicon-cog"></i>
 		<div class="options">
@@ -19,5 +21,7 @@
 			</div>
 			<div class="label label-danger remove-canvas-item"><i class="fa fa-times"></i> Remove</div>
 		</div>
-	</div>  {{/if}}
+	</div>  
+	{{/if}}
+	{{/if}}
 </template>
