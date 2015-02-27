@@ -1,27 +1,24 @@
 // Fixture data
-if (DataSetSummary.find().count() === 0) {
 
-    var now = new Date().getTime();
+if (Organizations.find().count() === 0) {
 
-    //if (Organizations.find().count() === 0) {
-        var orgId = Organizations.insert({
-            name: 'Mung',
-            accountCode: 4
-        });
-
-    //}
+    var orgId = Organizations.insert({
+        name: 'Mung',
+        accountCode: 4
+    });
 
     var org = Organizations.findOne(orgId);
+    
 
     // http://stackoverflow.com/questions/23507384/adding-more-fields-to-meteor-user-accounts
 
-    var tomId = Meteor.users.insert({
+    var newUser = Meteor.users.insert({
         emails: [
         // each email address can only belong to one user.
-            { address: "adriamooney+mung4@gmail.com", verified: true },
+            { address: "superadmin@test.com", verified: true },
         ],
         profile: { 
-            name: 'Adria Mooney',
+            name: 'Super Admin',
             orgName: org.name,
             orgId: org._id,
             accountCode: org.accountCode,
@@ -30,64 +27,9 @@ if (DataSetSummary.find().count() === 0) {
         roles: ['superadmin']
     });
 
-    var bobId = Meteor.users.insert({
-        emails: [
-        // each email address can only belong to one user.
-            { address: "james.dipadua+mung4@gmail.com", verified: true },
-        ],
-        profile: { 
-            name: 'James DiPadua',
-            orgName: org.name,
-            orgId: org._id,
-            accountCode: org.accountCode,
-            accountStatus: 'active'
-        },
-        roles: ['superadmin']
-    });
 
-    Accounts.setPassword(tomId, 'asdfasdf');
-    Accounts.setPassword(bobId, 'asdfasdf');
+    Accounts.setPassword(newUser, 'asdfasdf');
 
-
-    var tom = Meteor.users.findOne(tomId);
-
-    DataSetSummary.insert({
-        title: 'My DataSet 1',
-        file_name: 'some-name.csv',
-        uploadedBy: tom._id,
-        orgName: org.name,
-        orgId: org._id,
-        date_added: new Date(now - 10 * 3600 * 1000),
-        file_data: [
-            {
-                name: 'height',
-                property_data: [100, 50, 60, 75, 120, 101]
-            },
-            {
-                name: 'weight',
-                property_data: [120, 150, 160, 175, 220, 201]
-            }
-        ]
-    });
-
-    DataSetSummary.insert({
-        title: 'Data set with a really long name about stuff',
-        file_name: 'some-name.csv',
-        uploadedBy: tom._id,
-        orgName: org.name,
-        orgId: org._id,
-        date_added: new Date(now - 10 * 3600 * 1000),
-        file_data: [
-            {
-                name: 'height',
-                property_data: [100, 50, 60, 75, 120, 101]
-            },
-            {
-                name: 'weight',
-                property_data: [120, 150, 160, 175, 220, 201]
-            }
-        ]
-    });
 
     //create plans.  
     if(!AccountPlans.findOne({code: 1})) {
@@ -114,4 +56,5 @@ if (DataSetSummary.find().count() === 0) {
             code: 4
           });
     }
+
 }

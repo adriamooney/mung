@@ -12,10 +12,8 @@ Meteor.publish('datasetsummary', function(){
       return DataSetSummary.find({uploadedBy: currentUserId});
     }//otherwise limit collections to those in the organization
     else {
-      //why isn't this working???? it was working before
-      //TODO: NEED TO FIX THIS
-      //return DataSetSummary.find({orgId: orgId});
-      return DataSetSummary.find();
+      return DataSetSummary.find({orgId: orgId});
+      //return DataSetSummary.find();
     }
     
 
