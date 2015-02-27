@@ -63,6 +63,7 @@ Template.canvasItem.events({
 Template.canvasItem.helpers({
 	properties: function() {
 		var property_array = this.properties;
+		console.log(this);
 		return property_array;
 	}
 });
