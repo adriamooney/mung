@@ -1,4 +1,7 @@
 .datasets-list {
+	>li {
+		padding-bottom:5px;
+	}
 	.dataset-list-item {
 		cursor:pointer;
 		position:relative;
@@ -9,6 +12,8 @@
 		position:absolute;
 		z-index:10;
 		padding: 20px 20px 10px 20px;
+		right:0;
+		top:20px;
 		li {
 			padding-bottom: 10px;
 		}
@@ -16,6 +21,17 @@
 	}
 	.settings-toggle {
 		color: @white;
+		position:absolute;
+		right:0;
+		display:none;
+		cursor:pointer;
+	}
+	>li:hover .settings-toggle {
+		display:block;
+	}
+	>li.loading {
+		position:relative;
+		left:20px;
 	}
 	.edit {
 		cursor:pointer;
@@ -33,7 +49,7 @@
 	}
 }
 #canvas.col-md-8 {
-		 -webkit-transition: width .25s ease;
+	-webkit-transition: width .25s ease;
     -moz-transition: width .25s ease-in-out;
     -o-transition: width .25s ease-in-out;
     transition: width .25s ease;

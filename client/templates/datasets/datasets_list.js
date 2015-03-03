@@ -6,6 +6,17 @@ Template.dataSetsList.helpers({
 		//if (DataSetSummary.find().count() >= 1) {
 			return DataSetSummary.find().count();
 		//}
+	},
+	dataLoading: function() {
+		var loading = ServerSession.get('csv_to_json_running');
+		console.log(loading);
+		if(loading != 'loading') {
+			return false;
+		}
+		else {
+			return true;
+		}
+
 	}
 
 });
@@ -72,15 +83,26 @@ Template.dataSetsList.events({
 	'click #add-dataset': function(e, instance) {
 		$(e.currentTarget).addClass('cancel');
 		$(e.currentTarget).text('Cancel');
-		document.getElementById('uploader-wrap').style.display = 'block';
-		//TODO: what we really want here is to refresh the upload template back to its original state after successful upload	
+
+		//used for dynamic template
+		Session.set('uploadDataSet', 'uploadDataSet');
 
 	},
 	'click #add-dataset.cancel': function(e) {
-		document.getElementById('uploader-wrap').style.display = 'none';
+
+		Session.set('uploadDataSet', '');
+
 		$(e.currentTarget).removeClass('cancel');
 		$(e.currentTarget).html('<i class="fa fa-plus-circle glyphicon glyphicon-plus"></i> Data Set');
 	}
+});
+
+
+//dynamic template to show and hide upload widget.  
+Template.showUploadDataSet.helpers({  
+  showUploadDataSet: function() {
+    return Session.get('uploadDataSet');
+  }
 });
 
 

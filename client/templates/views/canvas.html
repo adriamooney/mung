@@ -2,10 +2,8 @@
 		{{>sidebar}}
 		<div class="col-md-8" id="canvas">
 			<!--canvasItem templates get rendered here-->
-		
-			<div style="display:none" id="uploader-wrap" class="well">
-				{{>uploadDataSet}}
-			</div>
+
+			{{>showUploadDataSet}}
 
 			{{# each canvasItems}}
 				{{>canvasItem}}
@@ -21,5 +19,15 @@
 </template>
 
 <template name="uploadDataSet">
-	{{> upload_bootstrap fileTypes='.csv' multiple=true }}
+	<div id="uploader-wrap" class="well">
+		{{> upload_bootstrap fileTypes='.csv' multiple=true }}
+	</div>
 </template>
+
+
+<template name="showUploadDataSet">  
+  {{#if showUploadDataSet}}
+      {{> Template.dynamic template=showUploadDataSet}}
+  {{/if}}
+</template>
+

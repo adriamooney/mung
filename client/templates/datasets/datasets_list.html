@@ -9,8 +9,10 @@
 					<li><span class="delete"><i class="fa fa-trash-o"></i> Remove Data Set</span></li>
 				</ul>
 				{{>dataSetItem}}
+
 			</li>
 		{{/each}}
+		{{#if dataLoading}}<li class="loading"><i class="fa-li fa fa-refresh fa-spin"></i> Loading Data...</li>{{/if}}
 		</ul>
 	</div>
 	{{/if}}
