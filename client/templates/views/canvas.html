@@ -4,7 +4,7 @@
 			<!--canvasItem templates get rendered here-->
 		
 			<div style="display:none" id="uploader-wrap" class="well">
-				{{> upload_bootstrap fileTypes='.csv' multiple=true }}
+				{{>uploadDataSet}}
 			</div>
 
 			{{# each canvasItems}}
@@ -18,4 +18,8 @@
 				{{/each}}
 		--> 
 		</div>
+</template>
+
+<template name="uploadDataSet">
+	{{> upload_bootstrap fileTypes='.csv' multiple=true }}
 </template>

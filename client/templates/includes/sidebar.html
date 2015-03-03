@@ -1,6 +1,17 @@
 <template name="sidebar">
-	<div class="col-md-4">	
-		{{#if currentUser}}<h3>My Data Sets</h3>{{>dataSetsList}}{{/if}}
-		<h3>Public Data Sets</h3>
-	</div>
+	<div class="col-md-4" id="sidebar">	
+
+		<div class="collapse-sidebar-wrap">
+			<button id="collsapse-sidebar" class="btn btn-xs btn-default"><i class="glyphicon glyphicon-triangle-left"></i> <i class="glyphicon glyphicon-menu-hamburger"></i></button>
+		</div>
+		
+		<div id="datasets-wrap">
+			{{#if currentUser}}<h3>My Data Sets</h3>{{>dataSetsList}}{{/if}}
+			<h3>Public Data Sets</h3>
+		</div>
+
+		
+		
+	</div>	
+
 </template>
