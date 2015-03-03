@@ -17,6 +17,37 @@ Template.dataSetsList.helpers({
 			return true;
 		}
 
+	},
+	canUpload: function() {
+		var account_code = Meteor.user().profile.accountCode;
+		console.log(account_code);
+		var data_sets = DataSetSummary.find().count();
+		console.log(data_sets);
+		var button = '<button class="btn btn-info btn-sm" id="add-dataset"><i class="fa fa-plus-circle glyphicon glyphicon-plus"></i> Data Set</button>';
+		if( account_code == 1 ) {
+			//free account
+			if(data_sets < 1) {
+				return button;
+			}
+		}
+		if(account_code == 2 || account_code == 3) {
+			//non profile and business
+			if(data_sets < 20) {
+				return button;
+			}
+		}
+		if(account_code == 4) {
+			//enterprise
+			return button
+		}
+		else {
+			return false;
+		}
+		//There is a maximum number of datasets a customer (or a user within an organization) can upload determined by the plan type
+		//free: 1 dataset (? not sure if that's possible ATM)
+		//business: 20
+		//non-profit: 20
+		//enterprise: unlimited
 	}
 
 });
@@ -81,6 +112,7 @@ Template.dataSetsList.events({
 		e.currentTarget.parentElement.style.display = 'none';
 	},
 	'click #add-dataset': function(e, instance) {
+		console.log('hi');
 		$(e.currentTarget).addClass('cancel');
 		$(e.currentTarget).text('Cancel');
 
