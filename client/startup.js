@@ -24,9 +24,6 @@ Meteor.startup(function () {
 
     //hide uploader when file is done uploading
     Session.set('uploadDataSet', '');
-    $('#add-dataset').removeClass('cancel');
-    //TODO:  THE CLICK IS NOT WORKING AFTER UPLOAD ANYMORE
-    $('#add-dataset').html('<i class="fa fa-plus-circle glyphicon glyphicon-plus"></i> Data Set');
 
   }
 

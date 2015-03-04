@@ -17,8 +17,17 @@
 	</div>
 	{{/if}}
 	
-		<!--use 3 curly braces to print html: -->
-	{{{canUpload}}}
+
+	{{# if canUpload}}
+	{{# if showCancelButton}}
+		<button class="btn btn-info btn-sm" id="add-dataset"><i class="fa fa-plus-circle glyphicon glyphicon-plus"></i> Data Set</button>
+		
+	{{else}}
+		<button class="btn btn-info btn-sm" id="cancel-add-dataset"> Cancel</button>
+
+	{{/if}}
+	{{/if}}
+
 	
 </template>
 
