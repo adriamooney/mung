@@ -6,6 +6,9 @@ Meteor.startup(function () {
     uploadDir: process.env.PWD + '/.uploads/',
     maxPostSize: 120000000, // max post size: 120 MB
     maxFileSize:  100000000, // max post size: 100 MB
+    mimeTypes: {
+      "txt": "text/plain"
+    },
     checkCreateDirectories: true //create the directories for you
   });
 
