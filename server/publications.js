@@ -1,17 +1,19 @@
-Meteor.publish('DataSetSummary', function(){
-
+Meteor.publish('datasetsummary', function(){
    
     var currentUserId = this.userId; //currently logged in user. syntax is different when used on the client (Meteor.userId())
        
     var user = Meteor.users.findOne({_id: this.userId});
     console.log(currentUserId);
     var orgId = user.profile.orgId;
-    //if user is part of this organization, which they are set by default upon signing up, then only show their own collections
+    console.log(orgId);
+
+    //if user is part of this organization, which they are set by default upon signing up, then only show their own data sets
     if(user.profile.orgName == 'Individual Users') {
       return DataSetSummary.find({uploadedBy: currentUserId});
     }//otherwise limit collections to those in the organization
     else {
       return DataSetSummary.find({orgId: orgId});
+      //return DataSetSummary.find();
     }
     
 
@@ -19,6 +21,10 @@ Meteor.publish('DataSetSummary', function(){
 
 Meteor.publish('organizations', function() {
 	return Organizations.find();
+});
+
+Meteor.publish('userOrg', function(orgId) {
+  return Organizations.find({_id: orgId});
 });
 
 
@@ -42,6 +48,10 @@ Meteor.publish(null, function (){
 
 Meteor.publish('accountplans', function() {
 	return AccountPlans.find();
+});
+
+Meteor.publish('posts', function() {
+  return Posts.find();  
 });
 
 

@@ -2,10 +2,12 @@
 		{{>sidebar}}
 		<div class="col-md-8" id="canvas">
 			<!--canvasItem templates get rendered here-->
-		
-				{{# each canvasItems}}
-					{{>canvasItem}}
-				{{/each}}
+
+			{{>showUploadDataSet}}
+
+			{{# each canvasItems}}
+				{{>canvasItem}}
+			{{/each}}
 			
 			<!-- FOR WHEN SUMMARY GRAPHS ARE READY TO GO--> 
 			<!-- 
@@ -15,3 +17,17 @@
 		--> 
 		</div>
 </template>
+
+<template name="uploadDataSet">
+	<div id="uploader-wrap" class="well">
+		{{> upload_bootstrap fileTypes='.csv' multiple=true }}
+	</div>
+</template>
+
+
+<template name="showUploadDataSet">  
+  {{#if showUploadDataSet}}
+      {{> Template.dynamic template=showUploadDataSet}}
+  {{/if}}
+</template>
+

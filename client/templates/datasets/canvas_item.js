@@ -8,9 +8,9 @@ Template.canvasItem.events({
 		var thisItem = document.getElementById('canvas-item-'+this._id);
 		thisItem.parentNode.removeChild(thisItem);
 
-		var obj = Session.get('selectedCollection');
+		var obj = Session.get('selected_dataset');
 		delete obj[this._id];
-		Session.set('selectedCollection', obj);
+		Session.set('selected_dataset', obj);
 	},
 	'click .close-properties': function(event) {
 		var propsDiv = event.currentTarget.parentElement;
@@ -50,7 +50,7 @@ Template.canvasItem.events({
 		});
 		// console.log(status_array);
 		var summary_graph_list = {
-			collection_id: canvas_id,
+			dataset_id: canvas_id,  
 			'status_array': status_array
 		};
 		// this is what gets the summary graphs
@@ -59,68 +59,11 @@ Template.canvasItem.events({
 
 });
 
-/*Template.canvas.rendered = function() {
-	//when canvas is rendered, get all the selected collections ids from the session variable object, 
-	//then render a canvasItem template for each id
-
-	var selected_collection = Session.get('selectedCollection');
-	console.log(selected_collection);
-
-	var canvas = document.getElementById('canvas');
-	if(selected_collection) {
-		for (var key in selected_collection) {
-		  if (selected_collection.hasOwnProperty(key)) {
-
-		  	//this is not happening fast enough, so it is undefined???
-
-			var data Collections.findOne({_id: selected_collection[key]});
-
-			return !data.ready();
-
-			//this is broken
-		    Meteor.setInterval(function() {
-		    	var data = Collections.findOne({_id: selected_collection[key]});
-		    	console.log(data);
-		    }, 2000);
-
-		    if(data) {
-		    	Meteor.clearInterval();
-		    	Blaze.renderWithData(Template.canvasItem, data, canvas);
-		    } 
-
-		    
-		  }
-		}
-	}
-
-} */
-
-Template.canvas.helpers({
-	canvasItems: function() {
-		var selected_collection = Session.get('selectedCollection');
-		//console.log(selected_collection);
-
-		var arr = [];
-
-		if(selected_collection) {
-			for (var key in selected_collection) {
-				if (selected_collection.hasOwnProperty(key)) {
-
-					var data = DataSetSummary.findOne({_id: selected_collection[key]});
-					arr.push(data);
-
-			  	}   
-			}
-
-			return arr;
-		}
-	}
-});
-
 
 Template.canvasItem.helpers({
 	properties: function() {
 		var property_array = this.properties;
+		console.log(this);
 		return property_array;
-	},
+	}
 });
