@@ -8,6 +8,8 @@ Meteor.startup(function () {
 
     //https://atmospherejs.com/matteodem/server-session 
     //https://github.com/matteodem/meteor-server-session :
+    //set server session to show that the file is uploading.  there is significant delay
+    //between here and when the file is done and inserted into the collection.
     ServerSession.set('csv_to_json_running', 'loading');
 
     var user_id = Meteor.userId();
@@ -22,8 +24,6 @@ Meteor.startup(function () {
 
     //hide uploader when file is done uploading
     Session.set('uploadDataSet', '');
-    $('#add-dataset').removeClass('cancel');
-    $('#add-dataset').html('<i class="fa fa-plus-circle glyphicon glyphicon-plus"></i> Data Set');
 
   }
 

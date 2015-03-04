@@ -17,6 +17,44 @@ Template.dataSetsList.helpers({
 			return true;
 		}
 
+	},
+	canUpload: function() {
+		var account_code = Meteor.user().profile.accountCode;
+		var data_sets = DataSetSummary.find().count();
+
+		if( account_code == 1 ) {
+			//free account
+			if(data_sets < 1) {
+				return true;
+			}
+		}
+		if(account_code == 2 || account_code == 3) {
+			//non profile and business
+			if(data_sets < 20) {
+				return true;
+			}
+		}
+		if(account_code == 4) {
+			//enterprise
+			return true;
+		}
+		else {
+			return false;
+		}
+		//There is a maximum number of datasets a customer (or a user within an organization) can upload determined by the plan type
+		//free: 1 dataset (? not sure if that's possible ATM)
+		//business: 20
+		//non-profit: 20
+		//enterprise: unlimited
+	},
+	showCancelButton: function() {
+		var show = Session.get('uploadDataSet');
+
+		if (show == '' || show == undefined) {
+			return true;
+
+		}
+		
 	}
 
 });
@@ -80,20 +118,15 @@ Template.dataSetsList.events({
 	'click .close': function(e) {
 		e.currentTarget.parentElement.style.display = 'none';
 	},
-	'click #add-dataset': function(e, instance) {
-		$(e.currentTarget).addClass('cancel');
-		$(e.currentTarget).text('Cancel');
-
-		//used for dynamic template
+	'click #add-dataset': function(e, instance) {	
+		//used for dynamic template upload widget and for cancel button
 		Session.set('uploadDataSet', 'uploadDataSet');
 
 	},
-	'click #add-dataset.cancel': function(e) {
+	'click #cancel-add-dataset': function(e) {
 
 		Session.set('uploadDataSet', '');
 
-		$(e.currentTarget).removeClass('cancel');
-		$(e.currentTarget).html('<i class="fa fa-plus-circle glyphicon glyphicon-plus"></i> Data Set');
 	}
 });
 
@@ -104,6 +137,9 @@ Template.showUploadDataSet.helpers({
     return Session.get('uploadDataSet');
   }
 });
+
+
+
 
 
 
