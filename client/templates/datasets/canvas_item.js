@@ -53,14 +53,33 @@ Template.canvasItem.events({
 			dataset_id: canvas_id,  
 			status_array: status_array
 		};
+		
 		// this is what gets the summary graphs
-		//Meteor.call("initialize_graphs", summary_graph_list);
-		//used for dynamic template upload widget and for cancel button
-			var summary_graph = [];
-		for (var j = 1; j<status_array.length-1; j++){
-			summary_graph[i] = Session.set('summaryGraph', 'summaryGraph');
-		}
+		var graph_data = MungSummaryGraph.init(summary_graph_list);
+		console.log(graph_data);
+		// WHY DOESN'T THIS WOKR??? WTF?? 
+		// var graph_data = Meteor.call("initialize_graphs", summary_graph_list);
+		
+		//used for dynamic template
+		//for (var j = 0; j<graph_data.length; j++){
+			// somehow get the data i want...
+		Session.set('summaryGraph', graph_data);
+		var asdf = Session.get('summaryGraph');
+		console.log(asdf);
+		//}
 	}
+});
+
+Template.showSummaryGraph.helpers({  
+  ifGraphData: function() {
+    return Session.get('summaryGraph');
+  }
+});
+
+Template.summaryGraph.helpers({  
+  graphData: function() {
+    return Session.get('summaryGraph');
+  }
 });
 
 

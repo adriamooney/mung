@@ -11,7 +11,9 @@ Meteor.methods({
 		DataSetSummary.update( {_id: id}, {$set: {title: newVal}});
 	},
 	initialize_graphs: function(summary_graph_list){
-		MungSummaryGraph.init(summary_graph_list);
+		var struct_data = MungSummaryGraph.init(summary_graph_list);
+		console.log("from inside methods.js: " + struct_data);
+		return struct_data;
 	},
 	get_summary_stats: function(data_summary_id) {
 		MungSummaryStats.init(data_summary_id);

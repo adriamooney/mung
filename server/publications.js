@@ -19,6 +19,11 @@ Meteor.publish('datasetsummary', function(){
 
 });
 
+//TODO: THIS NEEDS TO BE LIMITED LIKE TEH ABOVE 'DATASETSUMMARY'
+Meteor.publish('datasetdata', function(){
+    return DataSetData.find();
+});
+
 Meteor.publish('organizations', function() {
 	return Organizations.find();
 });
