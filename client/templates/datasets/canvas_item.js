@@ -51,11 +51,12 @@ Template.canvasItem.events({
 		// console.log(status_array);
 		var summary_graph_list = {
 			dataset_id: canvas_id,  
-			'status_array': status_array
+			status_array: status_array
 		};
 		// this is what gets the summary graphs
 		//Meteor.call("initialize_graphs", summary_graph_list);
-	}
+		//used for dynamic template upload widget and for cancel button
+		Session.set('summaryGraph', 'summaryGraph');
 
 });
 
