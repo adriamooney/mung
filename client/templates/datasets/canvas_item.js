@@ -56,8 +56,11 @@ Template.canvasItem.events({
 		// this is what gets the summary graphs
 		//Meteor.call("initialize_graphs", summary_graph_list);
 		//used for dynamic template upload widget and for cancel button
-		Session.set('summaryGraph', 'summaryGraph');
-
+			var summary_graph = [];
+		for (var j = 1; j<status_array.length-1; j++){
+			summary_graph[i] = Session.set('summaryGraph', 'summaryGraph');
+		}
+	}
 });
 
 
