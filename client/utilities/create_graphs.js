@@ -24,7 +24,7 @@ MungCreateGraph = function() {
       }
     };
 
-    svg = d3.select('summary-graph');
+    svg = d3.select('summary-graph'); //this is not right.  also where is the svg element included?
     svg.style({
       'width': svgAttributes.width + svgAttributes.margin.left + svgAttributes.margin.right,
       'height': svgAttributes.height + svgAttributes.margin.top + svgAttributes.margin.bottom,

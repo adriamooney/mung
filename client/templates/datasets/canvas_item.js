@@ -73,12 +73,6 @@ Template.canvasItem.events({
 	}
 });
 
-Template.showSummaryGraph.helpers({  
-  ifGraphData: function() {
-    return Session.get('summaryGraph');
-  }
-});
-
 
 Template.canvasItem.helpers({
 	properties: function() {
