@@ -57,27 +57,24 @@ Template.canvasItem.events({
 		// this is what gets the summary graphs
 		var graph_data = MungSummaryGraph.init(summary_graph_list);
 		console.log(graph_data);
+		console.log(graph_data.length);
 		// WHY DOESN'T THIS WOKR??? WTF?? 
 		// var graph_data = Meteor.call("initialize_graphs", summary_graph_list);
 		
 		//used for dynamic template
-		//for (var j = 0; j<graph_data.length; j++){
-			// somehow get the data i want...
+		// BUG -- for some reasons creates a "null" in the session
+		// :: checked all the loops for graph_data and it just suddenly appears 
+		// as the first entry in Session ('summaryGraph')...wtf
+		// see var asdf below
 		Session.set('summaryGraph', graph_data);
-		var asdf = Session.get('summaryGraph');
-		console.log(asdf);
+		// var asdf = Session.get('summaryGraph');
+		// console.log(asdf);
 		//}
 	}
 });
 
 Template.showSummaryGraph.helpers({  
   ifGraphData: function() {
-    return Session.get('summaryGraph');
-  }
-});
-
-Template.summaryGraph.helpers({  
-  graphData: function() {
     return Session.get('summaryGraph');
   }
 });
