@@ -29,7 +29,7 @@ Template.summaryGraph.helpers({
         svg.datum(graph_data[i]).call(chart);
         nv.utils.windowResize(function() { chart.update(); });
       });
-      return chart
+      return svg;
   	}
     //console.log(graphs);
     //return graphs;  //graphs is an array of charts
@@ -40,7 +40,7 @@ Template.summaryGraph.helpers({
 });
 
 Template.summaryGraph.rendered = function() {
-  console.log(nv);
+  //console.log(nv);
 
   //SEE THIS EXAMPLE:  
 
