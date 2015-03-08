@@ -2,19 +2,40 @@ Template.summaryGraph.helpers({
   ifGraphData: function() {
     return Session.get('summaryGraph');
   },
+  graphId: function() {
+    var graph_data = Session.get('summaryGraph');
+    var last = graph_data.length -1;
+    console.log(graph_data);
+    console.log(graph_data['ds_ref_id']);
+    console.log(graph_data[last]);
+    return graph_data[last]; //THIS IS NOT WORKING
+  },
   chart: function() {
   	var graph_data = Session.get('summaryGraph');
+    var last = graph_data.length -1;
   	var graphs = [];
-  	for (i = 0; i< graph_data.length; i++) {
+    //var svg = [];
+  	for (i = 1; i< graph_data.length; i++) {
 	  	//var graph = MungCreateGraph;
      
       //console.log(nv);
-        var chart = nv.models.lineChart();
+      var chart = nv.models.lineChart();
+      chart.useVoronoi(false);
 
-
+      nv.addGraph(function() {
+        chart.xAxis.axisLabel('Person number').tickFormat(d3.format('d'));
+        chart.yAxis.axisLabel('Age (years)').tickFormat(d3.format('d'));
+        svg = d3.select('#summary-graph').append('svg');
+        svg.datum(graph_data[i]).call(chart);
+        nv.utils.windowResize(function() { chart.update(); });
+      });
+      return chart
   	}
+    //console.log(graphs);
+    //return graphs;  //graphs is an array of charts
+    //console.log(chart);
   	//return graphs; //returns svg element with id
-    return chart;  //TODO;  needs to return an an array of svg elements.  then in the template we can chage to {{#each chart}} {{this}}{{/each}}
+    //return chart;  //TODO;  needs to return an an array of svg elements.  then in the template we can chage to {{#each chart}} {{this}}{{/each}}
   }
 });
 
