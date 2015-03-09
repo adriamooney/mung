@@ -15,16 +15,19 @@ Template.summaryGraph.helpers({
     var last = graph_data.length -1;
   	var graphs = [];
     //var svg = [];
+    var svg;
   	for (i = 1; i< graph_data.length; i++) {
 	  	//var graph = MungCreateGraph;
      
       //console.log(nv);
       var chart = nv.models.lineChart();
-      chart.useVoronoi(false);
+
+
+      chart.useVoronoi(false); //this is here because it supposedly fixes some error.  we can probobly remove it.
 
       nv.addGraph(function() {
-        chart.xAxis.axisLabel('Person number').tickFormat(d3.format('d'));
-        chart.yAxis.axisLabel('Age (years)').tickFormat(d3.format('d'));
+        chart.xAxis.axisLabel(graph_data[i].key).tickFormat(d3.format('d'));
+        chart.yAxis.axisLabel(graph_data[i].key).tickFormat(d3.format('d'));
         svg = d3.select('#summary-graph').append('svg');
         svg.datum(graph_data[i]).call(chart);
         nv.utils.windowResize(function() { chart.update(); });
