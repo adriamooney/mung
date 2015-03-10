@@ -12,28 +12,27 @@ Template.summaryGraph.helpers({
   },
   chart: function() {
   	var graph_data = Session.get('summaryGraph');
-    var last = graph_data.length -1;
-  	var graphs = [];
-    //var svg = [];
+    var graphs = [];
     var svg;
-  	for (i = 1; i< graph_data.length; i++) {
-	  	//var graph = MungCreateGraph;
-     
-      //console.log(nv);
-      var chart = nv.models.lineChart();
+    var chart = nv.models.lineChart();
 
-
-      chart.useVoronoi(false); //this is here because it supposedly fixes some error.  we can probobly remove it.
-
-      nv.addGraph(function() {
-        chart.xAxis.axisLabel(graph_data[i].key).tickFormat(d3.format('d'));
-        chart.yAxis.axisLabel(graph_data[i].key).tickFormat(d3.format('d'));
+    for (var i = 1; i < graph_data.length; i++) {
+      if (graph_data[i] != null) {
+        graphs = graph_data[i];
+        chart.useVoronoi(false); 
+        nv.addGraph(function() {
+        chart.xAxis.axisLabel(graphs.key).tickFormat(d3.format('d'));
+        chart.yAxis.axisLabel("Y-Axis").tickFormat(d3.format('d'));
         svg = d3.select('#summary-graph').append('svg');
-        svg.datum(graph_data[i]).call(chart);
+        svg.datum(graphs).call(chart);
         nv.utils.windowResize(function() { chart.update(); });
-      });
-      return svg;
-  	}
+      return chart;
+    });
+      }
+    }
+    //this is here because it supposedly fixes some error.  we can probobly remove it.
+    //graphs = [];
+      
     //console.log(graphs);
     //return graphs;  //graphs is an array of charts
     //console.log(chart);
