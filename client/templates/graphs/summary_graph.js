@@ -12,35 +12,28 @@ Template.summaryGraph.helpers({
   },
   chart: function() {
   	var graph_data = Session.get('summaryGraph');
-    var last = graph_data.length -1;
   	var graphs = [];
-    //var svg = [];
-    var svg;
   	for (i = 1; i< graph_data.length; i++) {
-	  	//var graph = MungCreateGraph;
-     
-      //console.log(nv);
-      var chart = nv.models.lineChart();
-
-
-      chart.useVoronoi(false); //this is here because it supposedly fixes some error.  we can probobly remove it.
-
-      nv.addGraph(function() {
-        chart.xAxis.axisLabel(graph_data[i].key).tickFormat(d3.format('d'));
-        chart.yAxis.axisLabel(graph_data[i].key).tickFormat(d3.format('d'));
-        svg = d3.select('#summary-graph').append('svg');
-        svg.datum(graph_data[i]).call(chart);
-        nv.utils.windowResize(function() { chart.update(); });
-      });
-      return svg;
+      graphs.push[createSvg(graph_data[i])];
   	}
-    //console.log(graphs);
-    //return graphs;  //graphs is an array of charts
-    //console.log(chart);
-  	//return graphs; //returns svg element with id
-    //return chart;  //TODO;  needs to return an an array of svg elements.  then in the template we can chage to {{#each chart}} {{this}}{{/each}}
+    return graphs;
   }
 });
+
+function createSvg(data) {
+    var chart = nv.models.lineChart();
+    chart.useVoronoi(false); //this is here because it supposedly fixes some error.  we can probobly remove it.
+
+    nv.addGraph(function() {
+        chart.xAxis.axisLabel(data.key).tickFormat(d3.format('d'));
+        chart.yAxis.axisLabel(data.key).tickFormat(d3.format('d'));
+        svg = d3.select('#summary-graph').append('svg');
+        svg.datum(data).call(chart);
+        nv.utils.windowResize(function() { chart.update(); });
+        return chart;
+      });
+
+}
 
 Template.summaryGraph.rendered = function() {
   //console.log(nv);

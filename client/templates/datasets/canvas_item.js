@@ -48,7 +48,7 @@ Template.canvasItem.events({
 			}
 			i++;
 		});
-		// console.log(status_array);
+		console.log(status_array);
 		var summary_graph_list = {
 			dataset_id: canvas_id,  
 			status_array: status_array
