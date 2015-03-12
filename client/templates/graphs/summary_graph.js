@@ -6,9 +6,8 @@ Template.summaryGraph.helpers({
     var graph_data = Session.get('summaryGraph');
     var last = graph_data.length -1;
     console.log(graph_data);
-    console.log(graph_data['ds_ref_id']);
-    console.log(graph_data[last]);
-    return graph_data[last]; //THIS IS NOT WORKING
+    console.log(graph_data[last][0]);
+    return graph_data[last][0]; //THIS IS NOT WORKING
   },
   chart: function() {
   	var graph_data = Session.get('summaryGraph');
@@ -21,19 +20,25 @@ Template.summaryGraph.helpers({
 });
 
 function createSvg(data) {
-    var chart = nv.models.lineChart();
-    chart.useVoronoi(false); //this is here because it supposedly fixes some error.  we can probobly remove it.
+    var chart = nv.models.lineChart().margin({left: 75, right:75, top:50, bottom:50});
 
     nv.addGraph(function() {
         chart.xAxis.axisLabel(data.key).tickFormat(d3.format('d'));
         chart.yAxis.axisLabel(data.key).tickFormat(d3.format('d'));
-        svg = d3.select('#summary-graph').append('svg');
+        svg = d3.select('#summary-graph').append('div').attr("class", "svg-wrap").html('<div class="label label-danger remove-svg-item"><i class="fa fa-times"></i> Remove</div>').append('svg');
         svg.datum(data).call(chart);
         nv.utils.windowResize(function() { chart.update(); });
         return chart;
       });
 
 }
+
+Template.summaryGraph.events({
+  'click .remove-svg-item': function(e, template) {
+    var t = template.find('.svg-wrap');
+    $(t).remove();
+  }
+});
 
 Template.summaryGraph.rendered = function() {
   //console.log(nv);
