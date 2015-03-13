@@ -67,6 +67,34 @@ Template.canvasItem.events({
 		// as the first entry in Session ('summaryGraph')...wtf
 		// see var asdf below
 		Session.set('summaryGraph', graph_data);
+
+		Session.set('showSummaryGraph', 'summaryGraph');
+
+		Session.set('showSummaryGraphItem', 'summaryGraphItem');
+
+		console.log(Session.get('showSummaryGraphItem'));
+
+		var graphs = [];
+		  	for (i = 1; i< graph_data.length; i++) {
+		      graphs.push[createSvg(graph_data[i])];
+		  	}
+		return graphs;
+		//TODO: this createSvg function is repeated in summary_graph.js helpers.  not sure how to make it generic, because of scoping issues. it 
+		//keeps saying it is undefined when I try to put it elsewhere.
+		function createSvg(data) {
+		    var chart = nv.models.lineChart().margin({left: 75, right:75, top:50, bottom:50});
+
+		    nv.addGraph(function() {
+		        chart.xAxis.axisLabel(data.key).tickFormat(d3.format('d'));
+		        chart.yAxis.axisLabel(data.key).tickFormat(d3.format('d'));
+		        svg = d3.select('#summary-graph').append('div').attr("class", "svg-wrap").html('<button class="btn label label-info remove-svg-item"><i class="fa fa-times"></i> Remove</button>').append('svg');
+		        svg.datum(data).call(chart);
+		        nv.utils.windowResize(function() { chart.update(); });
+		        return chart;
+		      });
+
+		}
+
 		// var asdf = Session.get('summaryGraph');
 		// console.log(asdf);
 		//}

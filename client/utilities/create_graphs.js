@@ -1,6 +1,23 @@
+/* why is this out of scope?  what to do? */
+
+function createSvg(data) {
+    var chart = nv.models.lineChart().margin({left: 75, right:75, top:50, bottom:50});
+
+    nv.addGraph(function() {
+        chart.xAxis.axisLabel(data.key).tickFormat(d3.format('d'));
+        chart.yAxis.axisLabel(data.key).tickFormat(d3.format('d'));
+        svg = d3.select('#summary-graph').append('div').attr("class", "svg-wrap").html('<button class="btn label label-danger remove-svg-item"><i class="fa fa-times"></i> Remove</button>').append('svg');
+        svg.datum(data).call(chart);
+        nv.utils.windowResize(function() { chart.update(); });
+        return chart;
+      });
+
+
+}
+
 //function Nvd3Graph ( ) {
 
-MungCreateGraph = function() {
+/*MungCreateGraph = function() {
   var svg,
       chart;
 
@@ -106,4 +123,4 @@ var myCallback = function ( ) {
 };
 
 //var graph = new Nvd3Graph;
-//nv.addGraph(graph.initialize, myCallback);
+//nv.addGraph(graph.initialize, myCallback);  */

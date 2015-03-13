@@ -2,11 +2,27 @@
 	{{#if ifGraphData}}
 	<div class="summary-graph" id="summary-graph">
 		{{#each chart }}
+			<!--{{>showSummaryGraphItem}}-->
 			{{this}}
 		{{/each}} 
 	</div>
 	{{/if}}
 </template>
+
+
+<!--this stuff is not necessary.  need to remove it and all the accompanying code for it-->
+<template name="summaryGraphItem">
+	{{# if showSummaryGraphItem}}
+	{{this}}
+	{{/if}}
+</template>
+
+<template name="showSummaryGraphItem">
+	{{# if showSummaryGraphItem}}
+		{{>Template.dynamic template=showSummaryGraphItem}}
+	{{/if}}
+</template>
+
 
 
 
