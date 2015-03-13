@@ -11,6 +11,7 @@ Template.summaryGraph.helpers({
   },
   chart: function() {
   	var graph_data = Session.get('summaryGraph');
+    console.log(graph_data);
   	var graphs = [];
   	for (i = 1; i< graph_data.length; i++) {
       graphs.push[createSvg(graph_data[i])];
@@ -19,8 +20,6 @@ Template.summaryGraph.helpers({
   }
 });
 
-//TODO: this createSvg function is repeated in canvas_item.js events.  not sure how to make it generic, because of scoping issues. it 
-//keeps saying it is undefined when I try to put it elsewhere.
 
 function createSvg(data) {
     var chart = nv.models.lineChart().margin({left: 75, right:75, top:50, bottom:50});
@@ -42,31 +41,16 @@ Template.summaryGraph.events({
     var t = $(e.currentTarget).closest('.svg-wrap');
     $(t).remove();
 
-    //TODO: NEED TO FIGURE OUT HOW TO RERENDER THE TEMPLATE AFTER THESE ARE REMOVED. RIGHT NOW WE CAN'T GET THEM BACK UNLESS
-    //WE ADD DUPLLICATE ADDGRAPH CODE IN THE SUMMARY GRAPH CLICK EVENT.
-    Session.set('showSummaryGraphItem', null);
-    console.log(Session.get('showSummaryGraphItem'));
+    //todo: rather than making this blank, it should actually show the graph_data that is present, so that when you
+    //go to another route and then come back here, it can get the other graphs you haven't deleted. right now if you delete one graph,
+    //that is basically like deleting them all when you go to another route and then come back, they will be all gone.
+    //not sure how to do this.
+    Session.set('summaryGraph', '');
 
   }
 });
 
-Template.showSummaryGraph.helpers({
-  showSummaryGraph: function() {
-      return Session.get('showSummaryGraph');
-  }
-});
 
-Template.summaryGraphItem.helpers({
-  showSummaryGraphItem: function() {
-      return Session.get('showSummaryGraphItem');
-  }
-});
-
-Template.showSummaryGraphItem.helpers({
-  showSummaryGraphItem: function() {
-      return Session.get('showSummaryGraphItem');
-  }
-});
 
 Template.summaryGraph.rendered = function() {
   //console.log(nv);
