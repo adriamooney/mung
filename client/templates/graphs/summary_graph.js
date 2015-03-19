@@ -22,13 +22,41 @@ Template.summaryGraph.helpers({
 
 
 function createSvg(data) {
-    var chart = nv.models.lineChart().margin({left: 75, right:75, top:50, bottom:50});
+    //console.log(data);
+    var chart = nv.models.lineChart()
+                .margin({left: 100})  //Adjust chart margins to give the x-axis some breathing room.
+                .useInteractiveGuideline(true)  //We want nice looking tooltips and a guideline!
+                //.transitionDuration(350)  //<-- seems to BREAK graphs if used...
+                .showYAxis(true)        //Show the y-axis
+                .showXAxis(true)        //Show the x-axis 
+                ;
 
     nv.addGraph(function() {
-        chart.xAxis.axisLabel(data.key).tickFormat(d3.format('d'));
-        chart.yAxis.axisLabel(data.key).tickFormat(d3.format('d'));
+        chart.xAxis.tickFormat(d3.format('f'));
+        chart.yAxis.axisLabel(data.key).tickFormat(d3.format(',g'));
         svg = d3.select('#summary-graph').append('div').attr("class", "svg-wrap").html('<button class="btn label label-danger remove-svg-item"><i class="fa fa-times"></i> Remove</button>').append('svg');
+        
+        var svgAttributes = {
+          //width: 0,
+          height: 300,
+          padding: 25,
+          margin : {
+            top: 5,
+            right: 10,
+            bottom: 5,
+            left: 10
+          }
+        };
+
+        svg.style({
+          //'width': svgAttributes.width + svgAttributes.margin.left + svgAttributes.margin.right,
+          'height': svgAttributes.height + svgAttributes.margin.top + svgAttributes.margin.bottom,
+          'padding': svgAttributes.padding,
+          'margin': '0 auto'
+        });
+        
         svg.datum(data).call(chart);
+        
         nv.utils.windowResize(function() { chart.update(); });
         return chart;
       });
