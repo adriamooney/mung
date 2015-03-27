@@ -25,7 +25,7 @@ function createSvg(data) {
     //console.log(data);
     var chart = nv.models.lineChart()
                 .margin({left: 100})  //Adjust chart margins to give the x-axis some breathing room.
-                .useInteractiveGuideline(true)  //We want nice looking tooltips and a guideline!
+                //.useInteractiveGuideline(true)  //We want nice looking tooltips and a guideline!
                 //.transitionDuration(350)  //<-- seems to BREAK graphs if used...
                 .showYAxis(true)        //Show the y-axis
                 .showXAxis(true)        //Show the x-axis 
