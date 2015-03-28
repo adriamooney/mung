@@ -22,15 +22,30 @@ Template.summaryGraph.helpers({
 
 
 function createSvg(data) {
-    //console.log(data);
-    var chart = nv.models.lineChart()
+    console.log(data);
+    for (var i = 0; i < data.length; i++) {
+      //console.log(data[i].values);
+      if (data[i].values[0].value) {
+        var chart = nv.models.discreteBarChart();
+                // .x(function(d) { return d.label })
+                // .y(function(d) { return d.value })
+                // .staggerLabels(true)
+                // .tooltips(false)
+                // .showValues(true)
+                ;
+
+      }else {
+        var chart = nv.models.lineChart()
                 .margin({left: 100})  //Adjust chart margins to give the x-axis some breathing room.
                 //.useInteractiveGuideline(true)  //We want nice looking tooltips and a guideline!
                 //.transitionDuration(350)  //<-- seems to BREAK graphs if used...
                 .showYAxis(true)        //Show the y-axis
                 .showXAxis(true)        //Show the x-axis 
                 ;
+      }
 
+    }
+    
     nv.addGraph(function() {
         chart.xAxis.tickFormat(d3.format('f'));
         chart.yAxis.axisLabel(data.key).tickFormat(d3.format(',g'));
@@ -81,43 +96,7 @@ Template.summaryGraph.events({
 
 
 Template.summaryGraph.rendered = function() {
-  //console.log(nv);
-
-  //SEE THIS EXAMPLE:  
-
-  /*var chart = nv.models.lineChart()
-      .margin({left: 100})  //Adjust chart margins to give the x-axis some breathing room.
-      .useInteractiveGuideline(true)  //We want nice looking tooltips and a guideline!
-      .transitionDuration(350)  //how fast do you want the lines to transition?
-      .showLegend(true)       //Show the legend, allowing users to turn on/off line series.
-      .showYAxis(true)        //Show the y-axis
-      .showXAxis(true)        //Show the x-axis
-    ;
-
-    nv.addGraph(function() {
-      chart.xAxis.axisLabel('Person number').tickFormat(d3.format('d'));
-      chart.yAxis.axisLabel('Age (years)').tickFormat(d3.format('d'));
-      d3.select('#chart svg').datum(
-        [{ values: People.find().fetch(), key: 'Age' }]
-      ).call(chart);
-      nv.utils.windowResize(function() { chart.update(); });
-      return chart;
-    });
-
-    this.autorun(function () {
-      d3.select('#chart svg').datum(
-        [{ values: People.find().fetch(), key: 'Age' }]
-      ).call(chart);
-      chart.update();
-    }); */
+  //
 };
 
 
-
-//	dynamic template to show graphs 
-//	(when they're created by "click .summary" in canvas_item.js)
-/*Template.showSummaryGraph.helpers({  
-  showSummaryGraph: function() {
-    return Session.get('summaryGraph');
-  }
-}); */
