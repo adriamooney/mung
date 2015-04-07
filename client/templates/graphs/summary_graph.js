@@ -40,7 +40,6 @@ function createSvg(data) {
                 .showXAxis(true)        //Show the x-axis 
                 ;
       }
-      console.log(chart);
     nv.addGraph(function() {
         // THIS IS USED A LOT IN EXAMPLES
         // BUT FOR ME, IT WAS CAUSING THE BARGRAPHS TO BREAK
