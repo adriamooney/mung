@@ -6,6 +6,7 @@
 		<i class="fa fa-cog options-toggle glyphicon glyphicon-cog"></i>
 		<div class="options">
 			<div class="label label-primary summary">Summary Graphs</div>
+			<div class="label label-primary predictive">Predictive Analytics</div>
 			<div class="label label-primary properties-toggle">Property List</div>
 			<div class="properties"><i class="fa fa-times close-properties"></i>
 				<form>
@@ -14,10 +15,12 @@
                         <label>
                           <input class="property-checkbox" type="checkbox" value="{{this}}" checked/> {{this}}
                         </label>
-                      </div>
+                    </div>
 				{{/each}}
 				</form>
-
+			</div>
+			<div>
+				{{> upload_bootstrap fileTypes='.csv'}}
 			</div>
 			<div class="label label-danger remove-canvas-item"><i class="fa fa-times"></i> Remove</div>
 		</div>

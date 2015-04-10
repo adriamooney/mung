@@ -1,0 +1,11 @@
+<template name="uploadClassificationData">
+	<div id="uploader-wrap" class="well">
+		{{> upload_bootstrap fileTypes='.csv' multiple=true }}
+	</div>
+</template>
+
+<template name="showUploadClassificationData">
+	{{#if showUploadClassificationData}}
+    	{{> Template.dynamic template=showUploadClassificationData}}
+  	{{/if}}
+</template>
