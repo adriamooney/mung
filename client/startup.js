@@ -31,8 +31,11 @@ Meteor.startup(function () {
       //hide uploader when file is done uploading
       Session.set('uploadDataSet', '');
       // clear the classification session 
-      Session.set('classificationData', '');
-
+      if (Session.get('uploadClassificationData')) {
+        Session.set('uploadClassificationData', '');
+        Session.set('classificationData', '');
+        Session.set('choosePredictiveEngine', 'choosePredictiveEngine');  
+      }
   }
 
 

@@ -15,13 +15,14 @@
                         <label>
                           <input class="property-checkbox" type="checkbox" value="{{this}}" checked/> {{this}}
                         </label>
-                    </div>
+                      </div>
 				{{/each}}
 				</form>
 			</div>
-			<div>
-				{{> upload_bootstrap fileTypes='.csv'}}
-			</div>
+				<div>
+					{{>showUploadClassificationData}}
+					{{>showChoosePredictiveEngine}}
+				</div>
 			<div class="label label-danger remove-canvas-item"><i class="fa fa-times"></i> Remove</div>
 		</div>
 	</div>  

@@ -60,9 +60,12 @@ Template.canvasItem.events({
 	},
 	'click .predictive': function(e) {
 		var canvas_id = this._id;
-		console.log(canvas_id);
-		Session.set('uploadClassificationData', 'uploadClassificationData');
-		Session.set('classificationData', canvas_id);
+		if (this.has_classification == 'TRUE'){
+			Session.set('choosePredictiveEngine', 'choosePredictiveEngine');
+		} else { 
+			Session.set('uploadClassificationData', 'uploadClassificationData');
+			Session.set('classificationData', canvas_id);
+		}
 	},
 	'click #cancel-predictive': function(e) {
 		Session.set('uploadClassificationData', '');
@@ -85,3 +88,9 @@ Template.showUploadClassificationData.helpers({
   }
 });
 
+//dynamic template to choose predictive engine.  
+Template.showChoosePredictiveEngine.helpers({  
+  showChoosePredictiveEngine: function() {
+    return Session.get('choosePredictiveEngine');
+  }
+});
