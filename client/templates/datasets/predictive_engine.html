@@ -3,7 +3,7 @@
 		<!-- LINEAR REGRESSION --> 
 		<input type="radio" name="predictive_type" value="linearReg"  />
 		Linear Regression
-		 Number of Iterations:  <select class="gradient_iterations" name="gradientIterations"> 
+		 Number of Iterations:  <select class="linear_iterations_{{_id}}" name="gradientIterations"> 
 			<option value="10">10</option>
 			<option value="25" selected>25</option>
 			<option value="50">50</option>
@@ -14,7 +14,7 @@
 		<input type="radio" name="predictive_type" value="logisticReg" checked
 		/>
 		Logistic Regression
-		 Number of Iterations:  <select class="gradient_iterations" name="gradientIterations"> 
+		 Number of Iterations:  <select class="logistic_iterations_{{_id}}" name="gradientIterations"> 
 			<option value="10">10</option>
 			<option value="25" selected>25</option>
 			<option value="50">50</option>
