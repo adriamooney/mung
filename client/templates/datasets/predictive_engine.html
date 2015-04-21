@@ -4,10 +4,11 @@
 		<input type="radio" name="predictive_type" value="linearReg"  />
 		Linear Regression
 		 Number of Iterations:  <select class="linear_iterations_{{_id}}" name="gradientIterations"> 
-			<option value="10">10</option>
-			<option value="25" selected>25</option>
-			<option value="50">50</option>
-			<option value="100">100</option>
+			<option value="25">25</option>
+			<option value="50" selected>50</option>
+			<option value="200">200</option>
+			<option value="400">400</option>
+			<option value="750">750</option>
 		</select>
 		<br />
 		<!-- LOGISTIC REGRESSION --> 
@@ -15,10 +16,11 @@
 		/>
 		Logistic Regression
 		 Number of Iterations:  <select class="logistic_iterations_{{_id}}" name="gradientIterations"> 
-			<option value="10">10</option>
-			<option value="25" selected>25</option>
-			<option value="50">50</option>
-			<option value="100">100</option>
+			<option value="25">25</option>
+			<option value="50" selected>50</option>
+			<option value="200">200</option>
+			<option value="400">400</option>
+			<option value="750">750</option>
 		</select>
 	</form>
 	<button id="predictive-engine-choice" class="btn btn-xs btn-default">Predict</button>
