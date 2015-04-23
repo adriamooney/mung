@@ -1,0 +1,33 @@
+<template name="choosePredictiveEngine">
+	<form class="choosePredictiveEngine">
+		<!-- LINEAR REGRESSION --> 
+		<input type="radio" name="predictive_type" value="linearReg"  />
+		Linear Regression
+		 Number of Iterations:  <select class="linear_iterations_{{_id}}" name="gradientIterations"> 
+			<option value="25">25</option>
+			<option value="50" selected>50</option>
+			<option value="200">200</option>
+			<option value="400">400</option>
+			<option value="750">750</option>
+		</select>
+		<br />
+		<!-- LOGISTIC REGRESSION --> 
+		<input type="radio" name="predictive_type" value="logisticReg" checked
+		/>
+		Logistic Regression
+		 Number of Iterations:  <select class="logistic_iterations_{{_id}}" name="gradientIterations"> 
+			<option value="25">25</option>
+			<option value="50" selected>50</option>
+			<option value="200">200</option>
+			<option value="400">400</option>
+			<option value="750">750</option>
+		</select>
+	</form>
+	<button id="predictive-engine-choice" class="btn btn-xs btn-default">Predict</button>
+</template>
+
+<template name="showChoosePredictiveEngine">
+	{{#if showChoosePredictiveEngine}}
+    	{{> Template.dynamic template=showChoosePredictiveEngine}}
+  	{{/if}}
+</template>

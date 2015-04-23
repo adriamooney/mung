@@ -138,9 +138,3 @@ Template.showUploadDataSet.helpers({
   }
 });
 
-
-
-
-
-
-

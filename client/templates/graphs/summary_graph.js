@@ -45,7 +45,7 @@ function createSvg(data) {
         // BUT FOR ME, IT WAS CAUSING THE BARGRAPHS TO BREAK
         // COMMENTING IT OUT DIDN'T SEEM TO AFFECT GRAPH CREATION SO FUCK IT. 
         //chart.xAxis.tickFormat(d3.format('f'));
-        //chart.yAxis.axisLabel(data.key).tickFormat(d3.format('g'));  
+        chart.yAxis.axisLabel(data.key).tickFormat(d3.format('g'));  
         svg = d3.select('#summary-graph').append('div').attr("class", "svg-wrap").html('<button class="btn label label-danger remove-svg-item"><i class="fa fa-times"></i> Remove</button>').append('svg');
         
         var svgAttributes = {

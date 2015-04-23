@@ -1,0 +1,13 @@
+<template name="uploadClassificationData">
+	<div id="uploader-wrap" class="well">
+		<p>It looks like you haven't provided any classification data. Please upload classification data to associate with this data set. Be sure the data is ordered in the same manner as the original data set before uploading the new classifications. After completing this step you will then choose the type of predictive analytics engine to use. </p>
+		{{> upload_bootstrap fileTypes='.csv' multiple=true }}
+	</div>
+</template>
+
+<template name="showUploadClassificationData">
+	{{#if showUploadClassificationData}}
+    	{{> Template.dynamic template=showUploadClassificationData}}
+  	{{/if}}
+</template>
+

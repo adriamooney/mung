@@ -56,19 +56,19 @@ Template.canvasItem.events({
 		
 		// this is what gets the summary graphs
 		var graph_data = MungSummaryGraph.init(summary_graph_list);
-
-		// WHY DOESN'T THIS WOKR??? WTF?? 
-		// var graph_data = Meteor.call("initialize_graphs", summary_graph_list);
-		
-		//used for dynamic template
-		// BUG -- for some reasons creates a "null" in the session
-		// :: checked all the loops for graph_data and it just suddenly appears 
-		// as the first entry in Session ('summaryGraph')...wtf
-		// see var asdf below
 		Session.set('summaryGraph', graph_data);
-
-
-
+	},
+	'click .predictive': function(e) {
+		var canvas_id = this._id;
+		if (this.has_classification == 'TRUE'){
+			Session.set('choosePredictiveEngine', 'choosePredictiveEngine');
+		} else { 
+			Session.set('uploadClassificationData', 'uploadClassificationData');
+			Session.set('classificationData', canvas_id);
+		}
+	},
+	'click #cancel-predictive': function(e) {
+		Session.set('uploadClassificationData', '');
 	}
 });
 
@@ -76,7 +76,21 @@ Template.canvasItem.events({
 Template.canvasItem.helpers({
 	properties: function() {
 		var property_array = this.properties;
-		console.log(this);
+		//console.log(this);
 		return property_array;
 	}
+});
+
+//dynamic template to show/hide y-classifiers upload widget.  
+Template.showUploadClassificationData.helpers({  
+  showUploadClassificationData: function() {
+    return Session.get('uploadClassificationData');
+  }
+});
+
+//dynamic template to choose predictive engine.  
+Template.showChoosePredictiveEngine.helpers({  
+  showChoosePredictiveEngine: function() {
+    return Session.get('choosePredictiveEngine');
+  }
 });
